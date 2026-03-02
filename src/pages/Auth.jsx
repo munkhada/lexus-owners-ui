@@ -10,39 +10,58 @@ export default function Auth() {
 
   const fullPhone = "976" + phone;
 
+  // ✅ Backend base URL (Vercel env -> VITE_API_URL)
+  const API_BASE =
+    import.meta.env.VITE_API_URL || "https://lexus-munkhada-1.onrender.com";
+
   // 1️⃣ утас шалгах
   const checkPhone = async () => {
-    setError("");
-    const res = await fetch(
-      `http://localhost:4000/check-phone?phone=${fullPhone}`
-    );
-    const data = await res.json();
+    try {
+      setError("");
 
-    if (!data.success) {
-      setError("Бүртгэлгүй дугаар");
-      return;
+      const res = await fetch(`${API_BASE}/check-phone?phone=${fullPhone}`);
+      const data = await res.json();
+
+      if (!data.success) {
+        setError(data.message || "Бүртгэлгүй дугаар");
+        return;
+      }
+
+      const otpRes = await fetch(`${API_BASE}/send-otp?phone=${fullPhone}`);
+      const otpData = await otpRes.json();
+
+      if (!otpData.success) {
+        setError(otpData.message || "OTP илгээж чадсангүй");
+        return;
+      }
+
+      setStep(2);
+    } catch (e) {
+      console.error(e);
+      setError("Backend-тэй холбогдож чадсангүй");
     }
-
-    await fetch(
-      `http://localhost:4000/send-otp?phone=${fullPhone}`
-    );
-
-    setStep(2);
   };
 
   // 2️⃣ OTP шалгах
   const verifyOtp = async () => {
-    const res = await fetch(
-      `http://localhost:4000/verify-otp?phone=${fullPhone}&otp=${otp}`
-    );
-    const data = await res.json();
+    try {
+      setError("");
 
-    if (!data.success) {
-      setError("OTP буруу");
-      return;
+      const res = await fetch(
+        `${API_BASE}/verify-otp?phone=${fullPhone}&otp=${otp}`
+      );
+      const data = await res.json();
+
+      if (!data.success) {
+        setError(data.message || "OTP буруу");
+        return;
+      }
+
+      navigate("/profile?phone=" + fullPhone);
+    } catch (e) {
+      console.error(e);
+      setError("Backend-тэй холбогдож чадсангүй");
     }
-
-    navigate("/profile?phone=" + fullPhone);
   };
 
   return (
