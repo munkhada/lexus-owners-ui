@@ -1,195 +1,297 @@
-<!DOCTYPE html>
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Lexus Owner Portal - Login</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script> 
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;700;800&amp;family=Inter:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "outline-variant": "#474747",
-                        "outline": "#919191",
-                        "surface-container-high": "#2a2a2a",
-                        "primary-fixed-dim": "#454747",
-                        "inverse-primary": "#5d5f5f",
-                        "on-error": "#690005",
-                        "inverse-on-surface": "#303030",
-                        "tertiary": "#e4e2e1",
-                        "on-primary-fixed-variant": "#e2e2e2",
-                        "surface-container-highest": "#353535",
-                        "surface-container": "#1f1f1f",
-                        "surface": "#131313",
-                        "surface-tint": "#c6c6c7",
-                        "on-secondary-fixed-variant": "#3a3c3c",
-                        "primary-container": "#d4d4d4",
-                        "on-background": "#e2e2e2",
-                        "on-tertiary-fixed": "#ffffff",
-                        "on-error-container": "#ffdad6",
-                        "primary": "#ffffff",
-                        "on-tertiary-fixed-variant": "#e4e2e1",
-                        "error": "#ffb4ab",
-                        "surface-container-lowest": "#0e0e0e",
-                        "secondary-fixed-dim": "#ababab",
-                        "error-container": "#93000a",
-                        "on-secondary-fixed": "#1a1c1c",
-                        "on-surface": "#e2e2e2",
-                        "on-primary-container": "#000000",
-                        "secondary-container": "#464747",
-                        "on-surface-variant": "#c6c6c6",
-                        "secondary": "#c7c6c6",
-                        "on-secondary-container": "#e3e2e2",
-                        "inverse-surface": "#e2e2e2",
-                        "tertiary-fixed-dim": "#474747",
-                        "on-tertiary-container": "#000000",
-                        "on-primary-fixed": "#ffffff",
-                        "surface-bright": "#393939",
-                        "tertiary-fixed": "#5f5e5e",
-                        "on-secondary": "#1a1c1c",
-                        "on-primary": "#1a1c1c",
-                        "primary-fixed": "#5d5f5f",
-                        "surface-variant": "#353535",
-                        "background": "#131313",
-                        "on-tertiary": "#1b1c1c",
-                        "surface-container-low": "#1b1b1b",
-                        "tertiary-container": "#929090",
-                        "secondary-fixed": "#c7c6c6",
-                        "surface-dim": "#131313"
-                    },
-                    fontFamily: {
-                        "headline": ["Manrope"],
-                        "body": ["Manrope"],
-                        "label": ["Inter"]
-                    },
-                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
-                },
-            },
-        }
-    </script>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-        }
-        .luxury-mesh-bg {
-            background-color: #131313;
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(255, 255, 255, 0.03) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(255, 255, 255, 0.02) 0px, transparent 50%);
-            position: relative;
-            overflow: hidden;
-        }
-        /* Parametric Curve Simulation */
-        .luxury-mesh-bg::after {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: repeating-linear-gradient(
-                45deg,
-                transparent,
-                transparent 100px,
-                rgba(255, 255, 255, 0.01) 100px,
-                rgba(255, 255, 255, 0.01) 101px
-            );
-            transform: rotate(-15deg);
-            pointer-events: none;
-        }
-        .glass-panel {
-            background: rgba(31, 31, 31, 0.6);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-        }
-    </style>
-</head>
-<body class="bg-background text-on-background font-body selection:bg-primary selection:text-on-primary">
-<!-- Top Navigation Anchor -->
-<header class="bg-[#131313]/80 backdrop-blur-2xl text-white font-manrope tracking-[0.05em] uppercase text-sm fixed top-0 w-full z-50 flex justify-between items-center h-20 px-8 md:px-16 w-full">
-<div class="text-lg font-light tracking-[0.3em] text-white">LEXUS MONGOLIA</div>
-<nav class="hidden md:flex gap-12">
-<a class="text-white font-bold transition-colors duration-400" href="#">LOGIN</a>
-<a class="text-neutral-500 hover:text-white transition-colors duration-400" href="#">VEHICLES</a>
-<a class="text-neutral-500 hover:text-white transition-colors duration-400" href="#">EXPERIENCE</a>
-</nav>
-<div class="md:hidden">
-<span class="material-symbols-outlined">menu</span>
-</div>
-</header>
-<main class="luxury-mesh-bg min-h-screen flex items-center justify-center px-6 pt-20">
-<!-- Background Abstract Element -->
-<div class="absolute inset-0 z-0 opacity-10 pointer-events-none">
-<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
-<path d="M-100,800 Q300,600 500,850 T1100,750" fill="none" stroke="white" stroke-width="0.5"></path>
-<path d="M-100,780 Q300,580 500,830 T1100,730" fill="none" stroke="white" stroke-width="0.3"></path>
-<path d="M-100,820 Q300,620 500,870 T1100,770" fill="none" stroke="white" stroke-width="0.2"></path>
-</svg>
-</div>
-<!-- Login Container -->
-<div class="w-full max-w-md z-10">
-<div class="glass-panel p-10 md:p-14 rounded-none border border-white/5 flex flex-col items-center shadow-2xl">
-<!-- Brand Symbol -->
-<div class="mb-12 opacity-90">
-<svg fill="none" height="60" viewbox="0 0 100 100" width="60" xmlns="http://www.w3.org/2000/svg">
-<circle cx="50" cy="50" r="48" stroke="white" stroke-width="1"></circle>
-<path d="M25 70L40 30H55L75 70" stroke="white" stroke-linecap="square" stroke-width="1.5"></path>
-<path d="M35 55H65" stroke="white" stroke-width="1"></path>
-</svg>
-</div>
-<!-- Header -->
-<div class="text-center mb-12">
-<h1 class="text-display-lg text-3xl md:text-4xl font-light tracking-[0.2em] uppercase text-white mb-4">
-                        Lexus Owner
-                    </h1>
-<p class="font-label text-xs tracking-[0.15em] text-neutral-500 uppercase">
-                        Experience Amazing Every Day
-                    </p>
-</div>
-<!-- Form -->
-<form class="w-full space-y-10">
-<div class="relative group">
-<label class="font-label text-[10px] tracking-[0.15em] text-neutral-400 uppercase mb-3 block" for="phone">
-                            Phone Number
-                        </label>
-<div class="relative border-b border-outline-variant/30 group-focus-within:border-primary transition-all duration-500">
-<input class="w-full bg-transparent border-none px-0 py-4 text-white text-lg font-light tracking-widest placeholder:text-neutral-700 focus:ring-0" id="phone" name="phone" placeholder="+976" type="tel"/>
-</div>
-</div>
-<div class="pt-4">
-<button class="w-full bg-white text-on-primary py-5 text-xs font-bold tracking-[0.2em] uppercase transition-all duration-400 hover:bg-primary-container active:scale-[0.98]" type="button">
-                            Request OTP
-                        </button>
-</div>
-</form>
-<!-- Secure Footer -->
-<div class="mt-12 flex items-center justify-center gap-2 opacity-40">
-<span class="material-symbols-outlined text-sm">lock</span>
-<span class="font-label text-[9px] tracking-[0.2em] uppercase">Secure Login</span>
-</div>
-</div>
-<!-- Contextual Links -->
-<div class="mt-8 flex justify-between px-2">
-<a class="font-label text-[10px] tracking-[0.1em] text-neutral-500 hover:text-white transition-colors duration-300 uppercase" href="#">Enroll Now</a>
-<a class="font-label text-[10px] tracking-[0.1em] text-neutral-500 hover:text-white transition-colors duration-300 uppercase" href="#">Need Help?</a>
-</div>
-</div>
-</main>
-<!-- Footer Anchor -->
-<footer class="bg-[#0E0E0E] text-neutral-500 font-inter text-[10px] tracking-[0.15em] uppercase w-full py-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 px-8 md:px-24 w-full">
-<div>
-            © 2024 LEXUS MONGOLIA. ALL RIGHTS RESERVED.
+const API =
+  import.meta.env.VITE_API_URL || "https://lexus-munkhada-1.onrender.com";
+
+export default function Login() {
+  const [phone, setPhone] = useState("");
+  const [otp, setOtp] = useState("");
+  const [step, setStep] = useState(1);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+
+  const cleanPhone = (value) => value.replace(/\D/g, "");
+
+  const sendOtp = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    const normalizedPhone = cleanPhone(phone);
+
+    if (!normalizedPhone) {
+      setError("Утасны дугаараа оруулна уу");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const res = await fetch(
+        `${API}/check-phone?phone=${encodeURIComponent(normalizedPhone)}`
+      );
+      const data = await res.json();
+
+      if (!data.success) {
+        setError(data.message || "Нэвтрэх боломжгүй");
+        return;
+      }
+
+      const otpRes = await fetch(
+        `${API}/send-otp?phone=${encodeURIComponent(normalizedPhone)}`
+      );
+      const otpData = await otpRes.json();
+
+      if (!otpData.success) {
+        setError(otpData.message || "OTP илгээж чадсангүй");
+        return;
+      }
+
+      setPhone(normalizedPhone);
+      setStep(2);
+    } catch (e) {
+      setError("Backend-тэй холбогдож чадсангүй");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const verifyOtp = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    const normalizedPhone = cleanPhone(phone);
+    const normalizedOtp = cleanPhone(otp);
+
+    if (!normalizedOtp) {
+      setError("OTP кодоо оруулна уу");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const res = await fetch(
+        `${API}/verify-otp?phone=${encodeURIComponent(
+          normalizedPhone
+        )}&otp=${encodeURIComponent(normalizedOtp)}`
+      );
+      const data = await res.json();
+
+      if (!data.success) {
+        setError(data.message || "Нэвтрэхэд алдаа гарлаа");
+        return;
+      }
+
+      localStorage.setItem("user", JSON.stringify(data.user));
+      navigate("/home");
+    } catch (e) {
+      setError("Нэвтрэхэд алдаа гарлаа");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="dark min-h-screen bg-[#131313] text-white overflow-hidden font-sans">
+      {/* Background */}
+      <div className="fixed inset-0 z-0 overflow-hidden bg-[radial-gradient(circle_at_50%_50%,#1b1b1b_0%,#131313_100%)]">
+        <div className="absolute inset-0 opacity-20 mix-blend-overlay">
+          <img
+            className="w-full h-full object-cover"
+            alt="Abstract Lexus background"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDU5DsUTodphcVmXkDHW1Qr6EH6NJ3SDwEw72AEyo_H24Rsk41BjIz4Ad5xepxHyGprp6oP0gySXuWtCd-0-ZvqIq91WrMiNuoJLNSWFR3IgfqDI_VeYqj_YMLXT8ksIDjXza0Y78h7M_atnqEiR-WNwGTRd68gCDE6r9otfxa2FURtAZbhalDPT_uVFDQa9USzO9bf6OTWpjea_imLx10UzUPsN2MNaJusVMS2MUl6yWt0xHVmyLV24M4rFG7YaqTtNsA4folCPX8"
+          />
         </div>
-<div class="flex gap-10">
-<a class="hover:text-white transition-colors duration-500" href="#">SUPPORT</a>
-<a class="hover:text-white transition-colors duration-500" href="#">LEGAL</a>
-<a class="hover:text-white transition-colors duration-500" href="#">PRIVACY</a>
-<a class="hover:text-white transition-colors duration-500" href="#">CONTACT</a>
-</div>
-</footer>
-</body></html>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-[#131313]" />
+      </div>
+
+      {/* Main */}
+      <main className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 lg:px-12">
+        {/* Brand */}
+        <div className="absolute top-12 left-12">
+          <h1 className="text-xl font-black tracking-[0.3em] text-white">
+            LEXUS MONGOLIA
+          </h1>
+        </div>
+
+        <div className="max-w-4xl w-full grid grid-cols-1 lg:grid-cols-12 gap-y-16 lg:gap-x-20 items-end">
+          {/* Left content */}
+          <div className="lg:col-span-7 space-y-12">
+            <div className="space-y-4">
+              <span className="text-sm uppercase tracking-[0.4em] text-gray-500 opacity-60 block">
+                Verified Collective
+              </span>
+              <h2 className="text-5xl md:text-7xl font-light leading-tight tracking-tighter text-white">
+                Welcome to the <br />
+                <span className="font-extrabold italic">Lexus Mongolia</span>{" "}
+                <br />
+                Collective
+              </h2>
+            </div>
+
+            <p className="max-w-sm text-lg leading-relaxed font-light text-gray-400">
+              Private access for verified owners only. A digital sanctuary for
+              those who demand precision.
+            </p>
+          </div>
+
+          {/* Right form */}
+          <div className="lg:col-span-5 w-full">
+            <div className="space-y-12">
+              <div className="space-y-2">
+                <p className="text-[10px] uppercase tracking-[0.2em] text-gray-500">
+                  Authentication Required
+                </p>
+                <p className="text-sm text-gray-300 opacity-80">
+                  {step === 1
+                    ? "Enter your registered phone number to continue."
+                    : "Enter the OTP code sent to your phone."}
+                </p>
+              </div>
+
+              {step === 1 ? (
+                <form className="space-y-10" onSubmit={sendOtp}>
+                  <div className="relative w-full border-b border-white/10 focus-within:border-white transition-all duration-700 ease-in-out">
+                    <label className="sr-only" htmlFor="phone">
+                      Phone Number
+                    </label>
+                    <div className="flex items-center space-x-4 pb-4">
+                      <span className="text-gray-500 text-2xl font-light">
+                        +976
+                      </span>
+                      <input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        placeholder="00 000 000"
+                        value={phone}
+                        onChange={(e) => setPhone(cleanPhone(e.target.value))}
+                        className="bg-transparent border-none p-0 w-full text-2xl tracking-widest text-white focus:ring-0 focus:outline-none placeholder:text-gray-600 font-light"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  {error && (
+                    <p className="text-sm text-red-400 tracking-wide">{error}</p>
+                  )}
+
+                  <div className="flex flex-col space-y-8">
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="w-full bg-white text-black py-6 px-12 font-bold uppercase tracking-[0.2em] text-sm flex justify-between items-center active:scale-[0.98] transition-all duration-300 disabled:opacity-60"
+                    >
+                      <span>{loading ? "Sending..." : "Get OTP"}</span>
+                      <span className="text-lg">→</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      className="inline-flex items-center space-x-4 text-left w-fit text-gray-500 hover:text-white transition-colors"
+                    >
+                      <div className="h-[1px] w-12 bg-gray-600" />
+                      <span className="text-[10px] uppercase tracking-[0.3em]">
+                        Request Access
+                      </span>
+                    </button>
+                  </div>
+                </form>
+              ) : (
+                <form className="space-y-10" onSubmit={verifyOtp}>
+                  <div className="space-y-6">
+                    <div className="border-b border-white/10 pb-4">
+                      <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mb-2">
+                        Registered Number
+                      </p>
+                      <p className="text-xl tracking-widest text-white">
+                        +976 {phone}
+                      </p>
+                    </div>
+
+                    <div className="relative w-full border-b border-white/10 focus-within:border-white transition-all duration-700 ease-in-out">
+                      <label className="sr-only" htmlFor="otp">
+                        OTP
+                      </label>
+                      <div className="flex items-center space-x-4 pb-4">
+                        <input
+                          id="otp"
+                          name="otp"
+                          type="text"
+                          placeholder="Enter OTP"
+                          value={otp}
+                          onChange={(e) => setOtp(cleanPhone(e.target.value))}
+                          className="bg-transparent border-none p-0 w-full text-2xl tracking-[0.4em] text-white focus:ring-0 focus:outline-none placeholder:text-gray-600 font-light"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {error && (
+                    <p className="text-sm text-red-400 tracking-wide">{error}</p>
+                  )}
+
+                  <div className="flex flex-col space-y-4">
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="w-full bg-white text-black py-6 px-12 font-bold uppercase tracking-[0.2em] text-sm flex justify-between items-center active:scale-[0.98] transition-all duration-300 disabled:opacity-60"
+                    >
+                      <span>{loading ? "Verifying..." : "Login"}</span>
+                      <span className="text-lg">→</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setStep(1);
+                        setOtp("");
+                        setError("");
+                      }}
+                      className="text-sm text-gray-400 hover:text-white transition-colors text-left"
+                    >
+                      ← Change phone number
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Status */}
+        <div className="absolute bottom-12 right-12 flex items-center space-x-4">
+          <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></div>
+          <span className="text-[9px] uppercase tracking-[0.3em] text-gray-500">
+            Encrypted Server Connection Stable
+          </span>
+        </div>
+      </main>
+
+      {/* Footer */}
+      <footer className="fixed bottom-12 left-12 flex flex-col items-start space-y-2">
+        <p className="text-[9px] tracking-[0.2em] text-gray-500 uppercase">
+          © 2024 LEXUS MONGOLIA. ALL RIGHTS RESERVED.
+        </p>
+        <div className="flex space-x-6">
+          <a
+            className="text-[9px] tracking-[0.2em] text-gray-500 uppercase hover:text-white transition-colors duration-400"
+            href="#"
+          >
+            Terms
+          </a>
+          <a
+            className="text-[9px] tracking-[0.2em] text-gray-500 uppercase hover:text-white transition-colors duration-400"
+            href="#"
+          >
+            Privacy
+          </a>
+        </div>
+      </footer>
+    </div>
+  );
+}
