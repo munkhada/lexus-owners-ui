@@ -1,184 +1,160 @@
-import { useNavigate } from "react-router-dom";
-import Header from "../components/Header";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Home() {
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
 
-  // 🔒 localStorage-оос user-ийг АЮУЛГҮЙ уншина
-  const rawUser = JSON.parse(localStorage.getItem("user")) || {};
-  const user = {
-    firstname: rawUser.firstname || "Хэрэглэгч",
-    lastname: rawUser.lastname || "",
-    model: rawUser.model || "",
-    vin: rawUser.vin || "",
-    membership: rawUser.membership || "",
+  useEffect(() => {
+    const saved = localStorage.getItem("user");
+
+    if (!saved) {
+      navigate("/");
+      return;
+    }
+
+    try {
+      const parsed = JSON.parse(saved);
+      setUser(parsed);
+    } catch {
+      localStorage.removeItem("user");
+      navigate("/");
+    }
+  }, [navigate]);
+
+  const logout = () => {
+    localStorage.removeItem("user");
+    navigate("/");
   };
 
+  const customerName =
+    user?.name || user?.customer_name || user?.full_name || "Lexus Owner";
+
+  const vehicle =
+    user?.model || user?.vehicle || user?.car_model || "Lexus LX 600";
+
+  const membership =
+    user?.membership || user?.membership_level || "Elite";
+
+  if (!user) return null;
+
   return (
-    <div style={styles.page}>
-      <Header />
+    <div className="home-page">
+      <div className="home-bg"></div>
 
-      {/* HERO */}
-      <section style={styles.hero}>
-        <div style={styles.overlay}>
-          <p style={styles.welcome}>
-            Тавтай морил, {user.firstname}
-          </p>
+      <nav className="home-nav">
+        <div className="home-logo">LEXUS MONGOLIA</div>
 
-          <h1 style={styles.title}>LEXUS OWNERS</h1>
-
-          {user.model && (
-            <p style={styles.subtitle}>
-              {user.model} • VIN: {user.vin}
-            </p>
-          )}
-
-          {user.membership && (
-            <span style={styles.badge}>
-              {user.membership}
-            </span>
-          )}
+        <div className="home-nav-links">
+          <Link to="/home" className="active">Home</Link>
+          <Link to="/profile">Profile</Link>
+          <Link to="/service">Concierge</Link>
+          <Link to="/promo">Benefits</Link>
         </div>
-      </section>
 
-      {/* ACTION CARDS */}
-      <section style={styles.actions}>
-        <Action
-          title="Миний Lexus"
-          desc="Автомашины дэлгэрэнгүй мэдээлэл"
-          onClick={() => navigate("/mycar")}
-        />
-        <Action
-          title="Үйлчилгээ"
-          desc="Засвар, баталгаат үйлчилгээ"
-          onClick={() => navigate("/service")}
-        />
-        <Action
-          title="Урамшуулал"
-          desc="Онцгой санал, эвент"
-          onClick={() => navigate("/promo")}
-        />
-      </section>
+        <div className="home-nav-actions">
+          <button onClick={logout} className="home-account-btn">
+            Sign Out
+          </button>
+        </div>
+      </nav>
 
-      <footer style={styles.footer}>
-        © 2026 Lexus Munkhada Owners
-      </footer>
+      <main className="home-main">
+        <section className="home-hero">
+          <div className="home-hero-left">
+            <div className="verified-row">
+              <span className="verified-dot"></span>
+              <span>Verified Owner</span>
+            </div>
+
+            <h1 className="home-title">
+              Welcome Back,
+              <br />
+              {customerName}
+            </h1>
+          </div>
+
+          <div className="summary-card">
+            <div className="summary-block">
+              <p className="summary-label">Current Vehicle</p>
+              <p className="summary-value">{vehicle}</p>
+            </div>
+
+            <div className="summary-divider"></div>
+
+            <div className="summary-block">
+              <p className="summary-label">Membership Level</p>
+              <p className="summary-value">{membership}</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="entry-grid">
+          <Link to="/profile" className="entry-card">
+            <div className="entry-top">
+              <span className="entry-icon">◌</span>
+              <span className="entry-number">01</span>
+            </div>
+
+            <div className="entry-bottom">
+              <h2>Profile</h2>
+              <p>
+                Manage your personal data and digital garage settings.
+              </p>
+              <div className="entry-line"></div>
+            </div>
+          </Link>
+
+          <Link to="/service" className="entry-card">
+            <div className="entry-top">
+              <span className="entry-icon">◌</span>
+              <span className="entry-number">02</span>
+            </div>
+
+            <div className="entry-bottom">
+              <h2>Support Concierge</h2>
+              <p>
+                Direct priority access to your personal Lexus advisor.
+              </p>
+              <div className="entry-line"></div>
+            </div>
+          </Link>
+
+          <Link to="/promo" className="entry-card">
+            <div className="entry-top">
+              <span className="entry-icon">◌</span>
+              <span className="entry-number">03</span>
+            </div>
+
+            <div className="entry-bottom">
+              <h2>Lexus Benefits</h2>
+              <p>
+                Exclusive invitations and premium lifestyle rewards.
+              </p>
+              <div className="entry-line"></div>
+            </div>
+          </Link>
+        </section>
+
+        <section className="home-feature">
+          <div className="feature-image"></div>
+
+          <div className="feature-content">
+            <h3>
+              Craftsmanship
+              <br />
+              Reimagined
+            </h3>
+
+            <p>
+              Experience the Omotenashi philosophy through every touchpoint of
+              your ownership journey. Every detail is tailored for your needs.
+            </p>
+
+            <button className="feature-btn">Explore Heritage</button>
+          </div>
+        </section>
+      </main>
     </div>
   );
 }
-
-function Action({ title, desc, onClick }) {
-  return (
-    <div
-      style={styles.card}
-      onClick={onClick}
-      onMouseEnter={(e) =>
-        (e.currentTarget.style.transform = "translateY(-4px)")
-      }
-      onMouseLeave={(e) =>
-        (e.currentTarget.style.transform = "translateY(0)")
-      }
-    >
-      <h3 style={styles.cardTitle}>{title}</h3>
-      <p style={styles.cardDesc}>{desc}</p>
-      <span style={styles.cardLink}>Дэлгэрэнгүй →</span>
-    </div>
-  );
-}
-
-/* ================= STYLES ================= */
-
-const styles = {
-  page: {
-    background: "#0b0b0b",
-    color: "#fff",
-    minHeight: "100vh",
-    fontFamily: "Montserrat, sans-serif",
-  },
-
-  hero: {
-    height: "60vh",
-    backgroundImage: "url(/RX.jpg)", // public/RX.jpg
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    position: "relative",
-  },
-
-  overlay: {
-    position: "absolute",
-    inset: 0,
-    background: "rgba(0,0,0,0.35)", // хэт хар биш
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    textAlign: "center",
-    padding: 20,
-  },
-
-  welcome: {
-    fontSize: 14,
-    opacity: 0.7,
-    marginBottom: 8,
-  },
-
-  title: {
-    fontSize: 48,
-    letterSpacing: 8,
-    marginBottom: 12,
-  },
-
-  subtitle: {
-    fontSize: 14,
-    opacity: 0.85,
-    marginBottom: 14,
-  },
-
-  badge: {
-    padding: "6px 14px",
-    borderRadius: 20,
-    background: "#fff",
-    color: "#000",
-    fontSize: 12,
-    fontWeight: 600,
-  },
-
-  actions: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-    gap: 24,
-    padding: "60px 80px",
-  },
-
-  card: {
-    background: "linear-gradient(180deg,#141414,#0b0b0b)",
-    borderRadius: 18,
-    padding: 28,
-    border: "1px solid rgba(255,255,255,0.08)",
-    cursor: "pointer",
-    transition: "all 0.25s ease",
-  },
-
-  cardTitle: {
-    marginBottom: 8,
-    fontWeight: 500,
-  },
-
-  cardDesc: {
-    fontSize: 14,
-    opacity: 0.7,
-    marginBottom: 16,
-  },
-
-  cardLink: {
-    fontSize: 13,
-    opacity: 0.8,
-  },
-
-  footer: {
-    textAlign: "center",
-    padding: 40,
-    fontSize: 12,
-    opacity: 0.4,
-  },
-};
