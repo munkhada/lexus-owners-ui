@@ -61,9 +61,24 @@ export default function Login() {
     }
   };
 
-  const verifyOtp = async (e) => {
-    e.preventDefault();
-    setError("");
+ const verifyOtp = async (e) => {
+  e.preventDefault();
+  setError("");
+
+  const demoUser = {
+    name: "BATBOLD",
+    phone: phone,
+    model: "Lexus RX 500h",
+    membership: "Black Member",
+    plate: "1234 УБА",
+    advisor_name: "Anu",
+    advisor_phone: "99112233",
+    advisor_image: "https://via.placeholder.com/300x400?text=Advisor"
+  };
+
+  localStorage.setItem("user", JSON.stringify(demoUser));
+  navigate("/home");
+};
 
     try {
       setLoading(true);
