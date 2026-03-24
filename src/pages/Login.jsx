@@ -16,18 +16,15 @@ export default function Login() {
   const onlyDigits = (v) => v.replace(/\D/g, "");
 
   const sendOtp = async (e) => {
-  e.preventDefault();
-  setError("");
+    e.preventDefault();
+    setError("");
 
-  const normalized = onlyDigits(phone);
+    const normalized = onlyDigits(phone);
 
-  if (normalized.length < 8) {
-    setError("Утасны дугаараа зөв оруулна уу");
-    return;
-  }
-
-  setStep(2);
-};
+    if (normalized.length < 8) {
+      setError("Утасны дугаараа зөв оруулна уу");
+      return;
+    }
 
     try {
       setLoading(true);
@@ -61,24 +58,9 @@ export default function Login() {
     }
   };
 
- const verifyOtp = async (e) => {
-  e.preventDefault();
-  setError("");
-
-  const demoUser = {
-    name: "BATBOLD",
-    phone: phone,
-    model: "Lexus RX 500h",
-    membership: "Black Member",
-    plate: "1234 УБА",
-    advisor_name: "Anu",
-    advisor_phone: "99112233",
-    advisor_image: "https://via.placeholder.com/300x400?text=Advisor"
-  };
-
-  localStorage.setItem("user", JSON.stringify(demoUser));
-  navigate("/home");
-};
+  const verifyOtp = async (e) => {
+    e.preventDefault();
+    setError("");
 
     try {
       setLoading(true);
