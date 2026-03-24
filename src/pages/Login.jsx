@@ -16,15 +16,18 @@ export default function Login() {
   const onlyDigits = (v) => v.replace(/\D/g, "");
 
   const sendOtp = async (e) => {
-    e.preventDefault();
-    setError("");
+  e.preventDefault();
+  setError("");
 
-    const normalized = onlyDigits(phone);
+  const normalized = onlyDigits(phone);
 
-    if (normalized.length < 8) {
-      setError("Утасны дугаараа зөв оруулна уу");
-      return;
-    }
+  if (normalized.length < 8) {
+    setError("Утасны дугаараа зөв оруулна уу");
+    return;
+  }
+
+  setStep(2);
+};
 
     try {
       setLoading(true);
