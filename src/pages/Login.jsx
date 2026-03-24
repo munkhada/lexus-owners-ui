@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./index.css";
+import ".//src/index.css";
 
 const API =
   import.meta.env.VITE_API_URL || "https://lexus-munkhada-1.onrender.com";
