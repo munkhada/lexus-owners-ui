@@ -95,7 +95,7 @@ export default function Login() {
 
           <h1 className="title">
             Welcome to the <br />
-            <span>Lexus Mongolia</span>
+            <span>Lexus Munkhada</span>
             <br />
             Collective
           </h1>
