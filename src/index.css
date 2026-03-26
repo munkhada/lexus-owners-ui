@@ -20,7 +20,6 @@ body,
   overflow: hidden;
 }
 
-/* LUXURY BACKGROUND */
 .login-bg {
   position: absolute;
   inset: 0;
@@ -37,7 +36,6 @@ body,
   background: radial-gradient(circle at center, rgba(255,255,255,0.025), transparent 58%);
 }
 
-/* гол контейнерийг дунд төвлөрүүлж байна */
 .login-container {
   position: relative;
   z-index: 2;
@@ -52,7 +50,6 @@ body,
   padding: 80px 56px;
 }
 
-/* left */
 .login-left {
   max-width: 700px;
 }
@@ -84,7 +81,6 @@ body,
   line-height: 1.65;
 }
 
-/* right */
 .login-right {
   width: 100%;
   max-width: 380px;
@@ -151,7 +147,7 @@ body,
   font-size: 14px;
 }
 
-/* ===== OTHER ===== */
+/* ===== GENERIC ===== */
 
 .header {
   padding: 18px 40px;
@@ -163,7 +159,8 @@ body,
   padding: 40px;
 }
 
-/* responsive */
+/* ===== LOGIN RESPONSIVE ===== */
+
 @media (max-width: 1100px) {
   .login-container {
     grid-template-columns: 1fr;
@@ -529,18 +526,6 @@ body,
   }
 }
 
-@media (max-width: 768px) {
-  .home-nav,
-  .home-main {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  ...
-}
-/* ===== PROFILE PAGE ===== */
-
-
 /* ===== PROFILE PAGE ===== */
 
 .profile-page {
@@ -606,10 +591,13 @@ body,
 
 .profile-account-btn {
   background: transparent;
+  border: 1px solid rgba(255,255,255,0.14);
   color: #fff;
-  border: none;
-  font-size: 24px;
+  padding: 10px 16px;
   cursor: pointer;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.14em;
 }
 
 .profile-main {
