@@ -1,199 +1,188 @@
-import Header from "../components/Header";
+import { Link, useNavigate } from "react-router-dom";
+import "./service.css";
 
 export default function Service() {
-    return (
-        <div style={styles.page}>
-            <Header />
+  const navigate = useNavigate();
 
-            <div style={styles.container}>
-                {/* HERO */}
-                <section style={styles.hero}>
-                    <h1 style={styles.title}>Үйлчилгээ</h1>
-                    <p style={styles.subtitle}>
-                        Lexus автомашинд зориулагдсан баталгаат болон урсгал үйлчилгээ
-                    </p>
+  const logout = () => {
+    localStorage.removeItem("user");
+    navigate("/");
+  };
 
-                    <div style={styles.badges}>
-                        <span style={styles.badge}>Баталгаа</span>
-                        <span style={styles.badge}>Урсгал</span>
-                        <span style={styles.badge}>Интервал</span>
-                    </div>
-                </section>
+  return (
+    <div className="service-page">
+      <div className="service-bg" />
 
-                {/* БАТАЛГАА */}
-                <section style={styles.section}>
-                    <h2 style={styles.sectionTitle}>Үйлдвэрийн баталгаат засвар</h2>
-                    <p style={styles.text}>
-                        Шинэ автомашины баталгаат хугацаа нь <b>3 жил эсвэл 100,000 км</b>
-                        – аль түрүүлж дууссанаар хүчинтэй.
-                    </p>
+      <nav className="service-nav">
+        <div className="service-logo">LEXUS MONGOLIA</div>
 
-                    <ul style={styles.list}>
-                        <li>Үйлдвэрийн гэмтэлтэй эд ангид хамаарна</li>
-                        <li>Албан ёсны төвд үйлчилгээ хийлгэсэн байх</li>
-                    </ul>
-                </section>
-
-                {/* БҮТЭН ЭД АНГИ */}
-                <section style={styles.section}>
-                    <h2 style={styles.sectionTitle}>Бүтэн эд анги солих</h2>
-                    <p style={styles.text}>
-                        Баталгаат засвараар зөвхөн гэмтэлтэй эд ангийг солино. Бүтнээр солих
-                        тохиолдолд бүрэн оношилгоо шаардлагатай.
-                    </p>
-
-                    <ul style={styles.list}>
-                        <li>Хөдөлгүүр</li>
-                        <li>Блок</li>
-                        <li>Хурдны хайрцаг (автомат / механик)</li>
-                    </ul>
-                </section>
-
-                {/* УРСГАЛ ҮЙЛЧИЛГЭЭ */}
-                <section style={styles.section}>
-                    <h2 style={styles.sectionTitle}>Урсгал үйлчилгээ</h2>
-
-                    <div style={styles.cards}>
-                        <div style={styles.card}>
-                            <h4>Давуу тал</h4>
-                            <ul>
-                                <li>Ирээдүйн өндөр зардлаас сэргийлнэ</li>
-                                <li>Дахин борлуулах үнэ цэнийг хадгална</li>
-                            </ul>
-                        </div>
-
-                        <div style={styles.card}>
-                            <h4>30,000 км хүртэл</h4>
-                            <ul>
-                                <li>Хөдөлгүүрийн тос солих</li>
-                                <li>Тосны шүүр солих</li>
-                                <li>Явах эд ангийн оношилгоо</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-                {/* ИНТЕРВАЛ */}
-                <section style={styles.section}>
-                    <h2 style={styles.sectionTitle}>Үйлчилгээний интервал</h2>
-
-                    <div style={styles.table}>
-                        {[
-                            ["1,000 км", "2,500 км дотор"],
-                            ["5,000 км", "2,500 – 7,500 км"],
-                            ["10,000 км", "7,500 – 12,500 км"],
-                            ["15,000 км", "12,500 – 17,500 км"],
-                            ["20,000 км", "17,500 – 22,500 км"],
-                            ["30,000 км", "27,500 – 32,500 км"],
-                        ].map(([a, b], i) => (
-                            <div key={i} style={styles.row}>
-                                <span>{a}</span>
-                                <span style={{ opacity: 0.7 }}>{b}</span>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-
-                {/* CONTACT */}
-                <section style={styles.contact}>
-                    <p>📞 7595-4444</p>
-                    <p>Лексусын төлөөлөгчөөр дамжуулан цаг захиална</p>
-                </section>
-            </div>
+        <div className="service-nav-links">
+          <Link to="/home">HOME</Link>
+          <Link to="/profile">PROFILE</Link>
+          <Link to="/service" className="active">
+            CONCIERGE
+          </Link>
+          <Link to="/promo">BENEFITS</Link>
         </div>
-    );
+
+        <button className="service-account-btn" onClick={logout}>
+          ○
+        </button>
+      </nav>
+
+      <main className="service-main">
+        <section className="service-hero">
+          <div className="service-hero-left">
+            <h1>
+              ALWAYS
+              <br />
+              AT YOUR
+              <br />
+              SERVICE.
+            </h1>
+
+            <p>
+              Experience the ultimate expression of Omotenashi. Our concierge
+              team is dedicated to providing seamless assistance across
+              Mongolia.
+            </p>
+          </div>
+
+          <div className="service-hero-right">
+            <p className="service-status-label">STATUS</p>
+            <p className="service-status-value">● 24/7 PRIORITY ACTIVE</p>
+          </div>
+        </section>
+
+        <section className="service-roadside-card">
+          <div className="service-roadside-image" />
+
+          <div className="service-roadside-overlay">
+            <div>
+              <h2>Roadside Assistance</h2>
+              <p>
+                Immediate support for any vehicle incident, anywhere in
+                Mongolia. Our recovery fleet is dispatched instantly.
+              </p>
+            </div>
+
+            <button>REQUEST IMMEDIATE AID</button>
+          </div>
+        </section>
+
+        <section className="service-dual-grid">
+          <div className="service-info-card">
+            <div className="service-icon">◫</div>
+            <h3>Service Concierge</h3>
+            <p>
+              Maintain the peak performance of your Lexus. Schedule your
+              seasonal maintenance or valet pick-up service directly.
+            </p>
+
+            <div className="service-actions-row">
+              <a href="/">SCHEDULE MAINTENANCE →</a>
+            </div>
+          </div>
+
+          <div className="service-info-card">
+            <div className="service-icon">◪</div>
+            <h3>Private Consultant</h3>
+            <p>
+              A dedicated Lexus representative ready to assist with technical
+              queries, ownership benefits, or lifestyle requests.
+            </p>
+
+            <div className="service-actions-row">
+              <a href="/">CALL REPRESENTATIVE</a>
+              <a href="/">DIRECT CHAT</a>
+            </div>
+          </div>
+        </section>
+
+        <section className="service-centers-section">
+          <div className="service-centers-copy">
+            <div>
+              <h3>Lexus Service Centers</h3>
+            </div>
+
+            <div>
+              <p>
+                Certified facilities equipped with the latest diagnostic
+                technology and staffed by Lexus-trained technicians in
+                Ulaanbaatar.
+              </p>
+              <button>VIEW ALL MAP LOCATIONS</button>
+            </div>
+          </div>
+
+          <div className="service-centers-grid">
+            <div className="service-center-card">
+              <div className="service-center-image service-center-image-1" />
+              <div className="service-center-text">
+                <h4>Lexus Ulaanbaatar Central</h4>
+                <p>
+                  Khan-Uul District, 15th Khoroo, Mahatma Gandhi Street
+                </p>
+                <span>OPEN 09:00 - 20:00</span>
+              </div>
+            </div>
+
+            <div className="service-center-card">
+              <div className="service-center-image service-center-image-2" />
+              <div className="service-center-text">
+                <h4>Bayanzurkh Service Hub</h4>
+                <p>Bayanzurkh District, Peace Avenue 45</p>
+                <span>OPEN 10:00 - 19:00</span>
+              </div>
+            </div>
+
+            <div className="service-center-card map-card">
+              <div className="service-center-image service-center-image-3" />
+              <div className="service-center-map-label">INTERACTIVE MAP</div>
+            </div>
+          </div>
+        </section>
+
+        <section className="service-master-section">
+          <div className="service-master-image">
+            <div className="service-master-overlay-card">
+              <h4>Master Craftsmanship</h4>
+              <p>
+                Every service is performed by Takumi-trained technicians using
+                only genuine Lexus components, ensuring your vehicle remains
+                exactly as intended.
+              </p>
+              <span />
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer className="service-footer">
+        <div className="service-footer-brand">LEXUS</div>
+
+        <div className="service-footer-grid">
+          <div>
+            <a href="/">PRIVACY POLICY</a>
+            <a href="/">TERMS OF SERVICE</a>
+            <a href="/">CONTACT US</a>
+          </div>
+
+          <div>
+            <p>ULAANBAATAR OFFICE</p>
+            <span>Sukhbaatar Square 2, Central Tower, 12th Floor</span>
+          </div>
+
+          <div>
+            <p>HOTLINE</p>
+            <strong>+976 11 313313</strong>
+          </div>
+        </div>
+
+        <div className="service-footer-copy">
+          © 2024 LEXUS MONGOLIA. ALL RIGHTS RESERVED.
+        </div>
+      </footer>
+    </div>
+  );
 }
-
-/* ================= STYLES ================= */
-
-const styles = {
-    page: {
-        background: "#000",
-        minHeight: "100vh",
-        color: "#fff",
-        fontFamily: "Montserrat, sans-serif",
-    },
-
-    container: {
-        maxWidth: 1100,
-        margin: "0 auto",
-        padding: "60px 40px",
-    },
-
-    hero: {
-        marginBottom: 80,
-    },
-
-    title: {
-        fontSize: 44,
-        fontWeight: 600,
-        marginBottom: 12,
-    },
-
-    subtitle: {
-        opacity: 0.7,
-        marginBottom: 24,
-    },
-
-    badges: {
-        display: "flex",
-        gap: 10,
-    },
-
-    badge: {
-        padding: "6px 12px",
-        borderRadius: 999,
-        background: "rgba(255,255,255,0.08)",
-        fontSize: 12,
-    },
-
-    section: {
-        marginBottom: 70,
-    },
-
-    sectionTitle: {
-        fontSize: 24,
-        marginBottom: 16,
-    },
-
-    text: {
-        opacity: 0.75,
-        lineHeight: 1.7,
-        marginBottom: 16,
-    },
-
-    list: {
-        paddingLeft: 20,
-        opacity: 0.8,
-        lineHeight: 1.8,
-    },
-
-    cards: {
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gap: 20,
-    },
-
-    card: {
-        background: "rgba(255,255,255,0.05)",
-        padding: 20,
-        borderRadius: 14,
-        lineHeight: 1.7,
-    },
-
-    table: {
-        borderTop: "1px solid rgba(255,255,255,0.1)",
-    },
-
-    row: {
-        display: "flex",
-        justifyContent: "space-between",
-        padding: "12px 0",
-        borderBottom: "1px solid rgba(255,255,255,0.05)",
-    },
-
-    contact: {
-        marginTop: 80,
-        opacity: 0.7,
-    },
-};
