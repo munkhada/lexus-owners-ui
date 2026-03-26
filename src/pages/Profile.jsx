@@ -53,7 +53,6 @@ export default function Profile() {
     const email = user?.email || "No email registered";
     const membership = user?.membership || "Гишүүнчлэл хүчинтэй";
     const plate = user?.plate || "0001 UBZ";
-    const ownerDate = user?.ownerDate || user?.deliveryDate || "2024-12-01";
 
     const maskedPhone =
       phone.length >= 8 ? `+976 ${phone.slice(0, 4)} XXXX` : `+976 ${phone}`;
@@ -67,7 +66,6 @@ export default function Profile() {
       email,
       membership,
       plate,
-      ownerDate,
       maskedPhone,
       membershipId,
     };
