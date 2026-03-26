@@ -528,3 +528,14 @@ body,
     font-size: 16px;
   }
 }
+
+@media (max-width: 768px) {
+  .home-nav,
+  .home-main {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  ...
+}
+/* ===== PROFILE PAGE ===== */
