@@ -1,106 +1,100 @@
-import { Link, useNavigate } from "react-router-dom";
+import "./profile.css";
 
 export default function Profile() {
-  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user"));
 
-  const logout = () => {
-    localStorage.removeItem("user");
-    navigate("/");
+  const model = user?.model || user?.["Model-Detail"];
+  const name = user?.name || `${user?.Овог || ""} ${user?.Нэр || ""}`;
+  const phone = user?.["Утасны дугаар"];
+  const email = user?.["И-мэйл хаяг"];
+
+  const getCarImage = (model) => {
+    if (!model) return "/LX.jpg";
+
+    const m = model.toLowerCase();
+
+    if (m.includes("lx")) return "/LX.jpg";
+    if (m.includes("rx500")) return "/RX500h.jpg";
+    if (m.includes("rx350h")) return "/RX350h.jpg";
+    if (m.includes("rx350")) return "/RX350.jpg";
+    if (m.includes("rx")) return "/RX.jpg";
+    if (m.includes("gx")) return "/GX.png";
+    if (m.includes("lm")) return "/LM.jpg";
+    if (m.includes("nx")) return "/NX.jpg";
+
+    return "/LX.jpg";
   };
 
   return (
     <div className="profile-page">
-      <div className="profile-bg"></div>
 
-      {/* NAV */}
-      <nav className="profile-nav">
-        <div className="profile-logo">LEXUS MONGOLIA</div>
-
-        <div className="profile-nav-links">
-          <Link to="/home">Home</Link>
-          <Link to="/profile" className="active">Profile</Link>
-          <Link to="/service">Concierge</Link>
-          <Link to="/promo">Benefits</Link>
+      <div className="header">
+        <div>LEXUS MONGOLIA</div>
+        <div>
+          <a href="/home">HOME</a>
+          <a href="/profile">PROFILE</a>
+          <a href="/service">CONCIERGE</a>
+          <a href="/promo">BENEFITS</a>
         </div>
+      </div>
 
-        <button className="profile-account-btn" onClick={logout}>
-          ○
-        </button>
-      </nav>
+      <div className="profile-container">
 
-      <main className="profile-main">
+        <div className="profile-left">
+          <p className="small">ACCOUNT OVERVIEW</p>
+          <h1 className="name">{name}</h1>
+          <p className="tag">Verified Premium Owner</p>
 
-        {/* HEADER */}
-        <section className="profile-header">
-          <div>
-            <p className="profile-eyebrow">Account Overview</p>
-            <h1 className="profile-name">BAT-ERDENE</h1>
-            <p className="profile-status">Verified Premium Owner</p>
-          </div>
-
-          <div className="profile-id">
-            <p>Membership ID</p>
-            <strong>LX-9911-0001</strong>
-          </div>
-        </section>
-
-        {/* GRID */}
-        <section className="profile-grid">
-
-          {/* CAR */}
-          <div className="profile-car">
-            <div className="profile-car-image"></div>
-
-            <div className="profile-car-content">
-              <h2>2024 LX 600</h2>
+          <div
+            className="vehicle-card"
+            style={{ backgroundImage: `url(${getCarImage(model)})` }}
+          >
+            <div className="vehicle-overlay">
+              <p className="vehicle-title">REGISTERED VEHICLE</p>
+              <h2>{model}</h2>
               <p>Plate: 0001 UBZ</p>
               <button>Service Records</button>
             </div>
           </div>
 
-          {/* RIGHT SIDE */}
-          <div className="profile-side">
-
-            <div className="profile-contact">
-              <p>Primary Contact</p>
-              <strong>+976 9911XXXX</strong>
-
-              <p>Email</p>
-              <strong>b.erdene@lexus.mn</strong>
+          <div className="info-grid">
+            <div>
+              <p className="label">Security</p>
+              <p>Biometric Authentication</p>
+              <p>Encryption Keys</p>
             </div>
 
-            <div className="profile-card">
-              <p className="tag">LEGACY</p>
-              <h3>Premium Access</h3>
-              <span>Expires Dec 2025 →</span>
+            <div>
+              <p className="label">Preferences</p>
+              <p>Language</p>
+              <p>Unit System</p>
             </div>
 
+            <div>
+              <p className="label">Documents</p>
+              <p>Warranty</p>
+              <p>Ownership Certificate</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="profile-right">
+          <div className="contact-card">
+            <p className="label">Primary Contact</p>
+            <h3>{phone}</h3>
+
+            <p className="label">Email</p>
+            <h3>{email}</h3>
           </div>
 
-        </section>
-
-        {/* BOTTOM */}
-        <section className="profile-bottom">
-          <div>
-            <h4>Security</h4>
-            <p>Biometric Authentication</p>
-            <p>Encryption Keys</p>
+          <div className="premium-card">
+            <p>LEGACY</p>
+            <h2>Premium Access</h2>
+            <p>Expires Dec 2025 →</p>
           </div>
+        </div>
 
-          <div>
-            <h4>Preferences</h4>
-            <p>Concierge Language</p>
-            <p>Unit System</p>
-          </div>
-
-          <div>
-            <h4>Documents</h4>
-            <p>Digital Warranty</p>
-            <p>Ownership Certificate</p>
-          </div>
-        </section>
-
-      </main>
+      </div>
     </div>
   );
 }
