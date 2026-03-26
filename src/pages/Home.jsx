@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Home() {
@@ -14,8 +14,7 @@ export default function Home() {
     }
 
     try {
-      const parsed = JSON.parse(saved);
-      setUser(parsed);
+      setUser(JSON.parse(saved));
     } catch {
       localStorage.removeItem("user");
       navigate("/");
@@ -27,14 +26,36 @@ export default function Home() {
     navigate("/");
   };
 
-  const customerName =
-    user?.name || user?.customer_name || user?.full_name || "Lexus Owner";
+  const profile = useMemo(() => {
+    const firstname =
+      user?.firstname ||
+      user?.firstName ||
+      user?.name ||
+      "Owner";
 
-  const vehicle =
-    user?.model || user?.vehicle || user?.car_model || "Lexus LX 600";
+    const lastname =
+      user?.lastname ||
+      user?.lastName ||
+      "";
 
-  const membership =
-    user?.membership || user?.membership_level || "Elite";
+    const fullName =
+      `${lastname ? `${lastname}, ` : ""}${firstname}`.trim() || "Lexus Owner";
+
+    const model =
+      user?.model ||
+      user?.vehicle ||
+      user?.car_model ||
+      "LEXUS LX 600";
+
+    const membership =
+      user?.membership || "Elite";
+
+    return {
+      fullName: fullName.toUpperCase(),
+      model: String(model).toUpperCase(),
+      membership,
+    };
+  }, [user]);
 
   if (!user) return null;
 
@@ -46,115 +67,138 @@ export default function Home() {
         <div className="home-logo">LEXUS MONGOLIA</div>
 
         <div className="home-nav-links">
-          <Link to="/home" className="active">Home</Link>
+          <Link to="/home" className="active">
+            Home
+          </Link>
           <Link to="/profile">Profile</Link>
           <Link to="/service">Concierge</Link>
           <Link to="/promo">Benefits</Link>
         </div>
 
-        <div className="home-nav-actions">
-          <button onClick={logout} className="home-account-btn">
-            Sign Out
-          </button>
-        </div>
+        <button className="home-account-btn" onClick={logout}>
+          ○
+        </button>
       </nav>
 
       <main className="home-main">
         <section className="home-hero">
-          <div className="home-hero-left">
-            <div className="verified-row">
-              <span className="verified-dot"></span>
+          <div className="home-hero-copy">
+            <div className="home-verified">
+              <span className="home-verified-dot"></span>
               <span>Verified Owner</span>
             </div>
 
             <h1 className="home-title">
-              Welcome Back,
+              WELCOME BACK,
               <br />
-              {customerName}
+              {profile.fullName}
             </h1>
           </div>
 
-          <div className="summary-card">
-            <div className="summary-block">
-              <p className="summary-label">Current Vehicle</p>
-              <p className="summary-value">{vehicle}</p>
+          <aside className="home-summary-card">
+            <div className="home-summary-block">
+              <div className="home-summary-label">Current Vehicle</div>
+              <div className="home-summary-value">{profile.model}</div>
             </div>
 
-            <div className="summary-divider"></div>
+            <div className="home-summary-divider"></div>
 
-            <div className="summary-block">
-              <p className="summary-label">Membership Level</p>
-              <p className="summary-value">{membership}</p>
+            <div className="home-summary-block">
+              <div className="home-summary-label">Membership Level</div>
+              <div className="home-summary-value">★ {profile.membership}</div>
             </div>
-          </div>
+          </aside>
         </section>
 
-        <section className="entry-grid">
-          <Link to="/profile" className="entry-card">
-            <div className="entry-top">
-              <span className="entry-icon">◌</span>
-              <span className="entry-number">01</span>
+        <section className="home-cards">
+          <Link to="/profile" className="home-card profile-card-home">
+            <div className="home-card-top">
+              <span className="home-card-icon">◉</span>
+              <span className="home-card-number">01</span>
             </div>
 
-            <div className="entry-bottom">
-              <h2>Profile</h2>
-              <p>
-                Manage your personal data and digital garage settings.
-              </p>
-              <div className="entry-line"></div>
+            <div className="home-card-bottom">
+              <h2>PROFILE</h2>
+              <p>Manage your personal data and digital garage settings.</p>
             </div>
           </Link>
 
-          <Link to="/service" className="entry-card">
-            <div className="entry-top">
-              <span className="entry-icon">◌</span>
-              <span className="entry-number">02</span>
+          <Link to="/service" className="home-card concierge-card-home">
+            <div className="home-card-top">
+              <span className="home-card-icon">⌕</span>
+              <span className="home-card-number">02</span>
             </div>
 
-            <div className="entry-bottom">
-              <h2>Support Concierge</h2>
-              <p>
-                Direct priority access to your personal Lexus advisor.
-              </p>
-              <div className="entry-line"></div>
+            <div className="home-card-bottom">
+              <h2>
+                SUPPORT
+                <br />
+                CONCIERGE
+              </h2>
+              <p>Direct priority access to your personal Lexus advisor.</p>
             </div>
           </Link>
 
-          <Link to="/promo" className="entry-card">
-            <div className="entry-top">
-              <span className="entry-icon">◌</span>
-              <span className="entry-number">03</span>
+          <Link to="/promo" className="home-card benefits-card-home">
+            <div className="home-card-top">
+              <span className="home-card-icon">✦</span>
+              <span className="home-card-number">03</span>
             </div>
 
-            <div className="entry-bottom">
-              <h2>Lexus Benefits</h2>
-              <p>
-                Exclusive invitations and premium lifestyle rewards.
-              </p>
-              <div className="entry-line"></div>
+            <div className="home-card-bottom">
+              <h2>
+                LEXUS
+                <br />
+                BENEFITS
+              </h2>
+              <p>Exclusive invitations and premium lifestyle rewards.</p>
             </div>
           </Link>
         </section>
 
-        <section className="home-feature">
-          <div className="feature-image"></div>
+        <section className="home-feature-section">
+          <div className="home-feature-image"></div>
 
-          <div className="feature-content">
+          <div className="home-feature-copy">
             <h3>
-              Craftsmanship
+              CRAFTSMANSHIP
               <br />
-              Reimagined
+              REIMAGINED
             </h3>
 
             <p>
               Experience the Omotenashi philosophy through every touchpoint of
-              your ownership journey. Every detail is tailored for your needs.
+              your ownership journey. Every detail, from service to lifestyle,
+              is tailored for your unique needs.
             </p>
 
-            <button className="feature-btn">Explore Heritage</button>
+            <button className="home-feature-btn">EXPLORE HERITAGE</button>
           </div>
         </section>
       </main>
+
+      <footer className="home-footer">
+        <div className="home-footer-brand">LEXUS MONGOLIA</div>
+
+        <div className="home-footer-links">
+          <div>
+            <a href="/">DISCOVER</a>
+            <a href="/">MODELS</a>
+            <a href="/">EXPERIENCE</a>
+          </div>
+
+          <div>
+            <a href="/">LEGAL</a>
+            <a href="/">PRIVACY</a>
+            <a href="/">TERMS</a>
+            <a href="/">CONTACT</a>
+          </div>
+        </div>
+
+        <div className="home-footer-copy">
+          © 2024 LEXUS MONGOLIA. ALL RIGHTS RESERVED.
+        </div>
+      </footer>
     </div>
   );
 }
