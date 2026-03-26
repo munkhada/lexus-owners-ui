@@ -1,461 +1,235 @@
-import express from "express";
-import cors from "cors";
-import nodemailer from "nodemailer";
-import { GoogleSpreadsheet } from "google-spreadsheet";
-import { JWT } from "google-auth-library";
+import { useEffect, useMemo, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-  
+export default function Profile() {
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
 
-const app = express();
+  useEffect(() => {
+    const saved = localStorage.getItem("user");
 
-app.use(cors());
-app.use(express.json());
-
-const PORT = process.env.PORT || 4000;
-const SHEET_ID = "1mDYRcroBWB9IR7W0mLwa-27qAY9wcaG1Y0RpiT4RU8A";
-
-const creds = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT || "{}");
-
-// ===== SMTP CONFIG =====
-const SMTP_HOST = process.env.SMTP_HOST;
-const SMTP_PORT = Number(process.env.SMTP_PORT || 465);
-const SMTP_USER = process.env.SMTP_USER;
-const SMTP_PASS = process.env.SMTP_PASS;
-
-// ===== OTP STORE =====
-const otpStore = new Map();
-
-// ===== HELPERS =====
-const clean = (v) => String(v ?? "").trim();
-
-function generateOtp() {
-  return Math.floor(100000 + Math.random() * 900000).toString();
-}
-
-function normalizePhone(phone) {
-  let p = clean(phone).replace(/\D/g, "");
-  if (p.startsWith("976") && p.length > 8) {
-    p = p.slice(3);
-  }
-  return p;
-}
-
-function normalizeKey(key) {
-  return clean(key).toLowerCase().replace(/\s+/g, " ");
-}
-
-function isMembershipActive(value) {
-  const v = clean(value).toLowerCase();
-
-  if (!v) return false;
-  if (v.includes("цуц")) return false;
-  if (v.includes("хүчингүй")) return false;
-
-  return v.includes("хүчинтэй");
-}
-
-function rowToObj(row) {
-  if (!row) return {};
-  if (typeof row.toObject === "function") {
-    return row.toObject();
-  }
-  return {};
-}
-
-function getValueByPossibleKeys(row, possibleMatchers = []) {
-  const obj = rowToObj(row);
-
-  for (const key of Object.keys(obj)) {
-    const nk = normalizeKey(key);
-
-    for (const matcher of possibleMatchers) {
-      if (typeof matcher === "string" && nk === normalizeKey(matcher)) {
-        return clean(obj[key]);
-      }
-
-      if (matcher instanceof RegExp && matcher.test(nk)) {
-        return clean(obj[key]);
-      }
-
-      if (typeof matcher === "function" && matcher(nk, key)) {
-        return clean(obj[key]);
-      }
-    }
-  }
-
-  return "";
-}
-
-function getPhoneFromRow(row) {
-  return getValueByPossibleKeys(row, [
-    (nk) => nk.includes("утас"),
-    "утасны дугаар",
-    "утас",
-    "phone",
-    "phone number",
-  ]);
-}
-
-function getMembershipFromRow(row) {
-  return getValueByPossibleKeys(row, [
-    (nk) => nk.includes("гишүүн"),
-    "гишүүнчлэл хүчинтэй",
-    "membership",
-    "status",
-  ]);
-}
-
-function getModelFromRow(row) {
-  return getValueByPossibleKeys(row, [
-    "model-detail",
-    "model detail",
-    (nk) => nk.includes("model"),
-  ]);
-}
-
-function getOwnerDateFromRow(row) {
-  return getValueByPossibleKeys(row, [
-    "автомашин хүлээлгэж өгсөн огноо",
-    (nk) => nk.includes("огноо"),
-    "owner date",
-    "date",
-  ]);
-}
-
-function getLastnameFromRow(row) {
-  return getValueByPossibleKeys(row, [
-    "овог",
-    "lastname",
-    "last name",
-  ]);
-}
-
-function getFirstnameFromRow(row) {
-  return getValueByPossibleKeys(row, [
-    "нэр",
-    "firstname",
-    "first name",
-  ]);
-}
-
-function getEmailFromRow(row) {
-  return getValueByPossibleKeys(row, [
-    (nk) => nk.includes("и-мэйл"),
-    (nk) => nk.includes("имэйл"),
-    (nk) => nk.includes("email"),
-    "и-мэйл хаяг",
-    "email",
-  ]);
-}
-
-function maskEmail(email) {
-  const e = clean(email);
-  if (!e || !e.includes("@")) return "";
-  const [name, domain] = e.split("@");
-  if (name.length <= 2) return `${name[0] || ""}***@${domain}`;
-  return `${name.slice(0, 2)}***@${domain}`;
-}
-
-// ===== LOAD SHEET =====
-async function loadSheet() {
-  const auth = new JWT({
-    email: creds.client_email,
-    key: creds.private_key,
-    scopes: ["https://www.googleapis.com/auth/spreadsheets.readonly"],
-  });
-
-  const doc = new GoogleSpreadsheet(SHEET_ID, auth);
-  await doc.loadInfo();
-  return doc;
-}
-
-// ===== FIND USER =====
-async function findUserByPhone(phone) {
-  const doc = await loadSheet();
-  const sheet = doc.sheetsByIndex[0];
-  const rows = await sheet.getRows();
-
-  const target = normalizePhone(phone);
-  console.log("Searching phone:", target);
-  console.log("Rows count:", rows.length);
-
-  const found = rows.find((row) => {
-    const rowPhone = normalizePhone(getPhoneFromRow(row));
-    return rowPhone && rowPhone === target;
-  });
-
-  if (found) {
-    console.log("User found:", {
-      lastname: getLastnameFromRow(found),
-      firstname: getFirstnameFromRow(found),
-      phone: getPhoneFromRow(found),
-      email: getEmailFromRow(found),
-      membership: getMembershipFromRow(found),
-    });
-  } else if (rows[0]) {
-    console.log("First row headers:", Object.keys(rowToObj(rows[0])));
-  }
-
-  return found || null;
-}
-
-// ===== SMTP / EMAIL =====
-const transporter = nodemailer.createTransport({
-  host: SMTP_HOST,
-  port: SMTP_PORT,
-  secure: SMTP_PORT === 587,
-  auth: {
-    user: SMTP_USER,
-    pass: SMTP_PASS,
-  },
-  connectionTimeout: 10000,
-  greetingTimeout: 10000,
-  socketTimeout: 10000,
-});
-
-async function sendOtpEmail(toEmail, otp, firstname = "") {
-  if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS) {
-    throw new Error("SMTP тохиргоо дутуу байна");
-  }
-
-  const name = clean(firstname) || "Хэрэглэгч";
-
-  const info = await transporter.sendMail({
-    from: `"Lexus Owners" <${SMTP_USER}>`,
-    to: clean(toEmail),
-    subject: "Lexus Owners нэвтрэх код",
-    html: `
-      <div style="font-family: Arial, sans-serif; color: #111; line-height: 1.6;">
-        <h2 style="margin-bottom: 12px;">Lexus Owners</h2>
-        <p>Сайн байна уу, ${name}</p>
-        <p>Таны нэвтрэх нэг удаагийн баталгаажуулах код:</p>
-        <div style="font-size: 32px; font-weight: bold; letter-spacing: 6px; margin: 18px 0;">
-          ${otp}
-        </div>
-        <p>Энэ кодыг бусдад бүү дамжуулаарай.</p>
-      </div>
-    `,
-  });
-
-  console.log("EMAIL SENT:", info.messageId);
-  return info;
-}
-
-// ===== HEALTH CHECK =====
-app.get("/", (req, res) => {
-  res.send("Lexus Owners Backend OK 🚗");
-});
-
-// ===== OPTIONAL SMTP TEST =====
-app.get("/smtp-test", async (req, res) => {
-  try {
-    await transporter.verify();
-    return res.json({
-      success: true,
-      message: "SMTP OK",
-    });
-  } catch (e) {
-    console.error("SMTP TEST ERROR:", e);
-    return res.status(500).json({
-      success: false,
-      message: "SMTP алдаа",
-      error: e.message || String(e),
-    });
-  }
-});
-
-// ===== CHECK PHONE =====
-app.get("/check-phone", async (req, res) => {
-  try {
-    const { phone } = req.query;
-
-    if (!phone) {
-      return res.json({
-        success: false,
-        message: "Утас оруулаагүй байна",
-      });
+    if (!saved) {
+      navigate("/");
+      return;
     }
 
-    const found = await findUserByPhone(phone);
-
-    if (!found) {
-      return res.json({
-        success: false,
-        message: "Бүртгэлгүй хэрэглэгч",
-      });
+    try {
+      const parsed = JSON.parse(saved);
+      setUser(parsed);
+    } catch {
+      localStorage.removeItem("user");
+      navigate("/");
     }
+  }, [navigate]);
 
-    const membership = getMembershipFromRow(found);
+  const logout = () => {
+    localStorage.removeItem("user");
+    navigate("/");
+  };
 
-    if (!isMembershipActive(membership)) {
-      return res.json({
-        success: false,
-        message: "Гишүүнчлэл хүчингүй",
-      });
-    }
+  const profile = useMemo(() => {
+    const firstname =
+      user?.firstname ||
+      user?.firstName ||
+      user?.name ||
+      "Lexus";
 
-    return res.json({
-      success: true,
+    const lastname =
+      user?.lastname ||
+      user?.lastName ||
+      "";
+
+    const fullName =
+      `${lastname} ${firstname}`.trim() || "Lexus Owner";
+
+    const model =
+      user?.model ||
+      user?.vehicle ||
+      user?.car_model ||
+      user?.modelDetail ||
+      "LEXUS RX";
+
+    const phone = user?.phone || "99110000";
+    const email = user?.email || "No email registered";
+    const membership = user?.membership || "Гишүүнчлэл хүчинтэй";
+    const plate = user?.plate || "0001 UBZ";
+    const ownerDate = user?.ownerDate || user?.deliveryDate || "2024-12-01";
+
+    const maskedPhone =
+      phone.length >= 8 ? `+976 ${phone.slice(0, 4)} XXXX` : `+976 ${phone}`;
+
+    const membershipId = `LX-${phone.slice(0, 4) || "9911"}-0001`;
+
+    return {
+      fullName,
+      model,
+      phone,
+      email,
       membership,
-      user: {
-        model: getModelFromRow(found),
-        ownerDate: getOwnerDateFromRow(found),
-        lastname: getLastnameFromRow(found),
-        firstname: getFirstnameFromRow(found),
-        phone: getPhoneFromRow(found),
-        email: getEmailFromRow(found),
-        membership,
-      },
-    });
-  } catch (e) {
-    console.error("CHECK PHONE ERROR:", e);
+      plate,
+      ownerDate,
+      maskedPhone,
+      membershipId,
+    };
+  }, [user]);
 
-    return res.status(500).json({
-      success: false,
-      message: "Server алдаа",
-      error: e.message || String(e),
-    });
-  }
-});
+  if (!user) return null;
 
-// ===== SEND OTP BY EMAIL =====
-app.get("/send-otp", async (req, res) => {
-  try {
-    const { phone } = req.query;
+  return (
+    <div className="profile-page">
+      <div className="profile-bg"></div>
 
-    if (!phone) {
-      return res.json({
-        success: false,
-        message: "Утас оруулаагүй байна",
-      });
-    }
+      <nav className="profile-nav">
+        <div className="profile-logo">LEXUS MONGOLIA</div>
 
-    const inputPhone = normalizePhone(phone);
-    const found = await findUserByPhone(inputPhone);
+        <div className="profile-nav-links">
+          <Link to="/home">Home</Link>
+          <Link to="/profile" className="active">
+            Profile
+          </Link>
+          <Link to="/service">Concierge</Link>
+          <Link to="/promo">Benefits</Link>
+        </div>
 
-    if (!found) {
-      return res.json({
-        success: false,
-        message: "Бүртгэлгүй хэрэглэгч",
-      });
-    }
+        <div className="profile-nav-actions">
+          <button className="profile-account-btn" onClick={logout}>
+            Sign Out
+          </button>
+        </div>
+      </nav>
 
-    const membership = getMembershipFromRow(found);
-    console.log("MEMBERSHIP:", membership);
+      <main className="profile-main">
+        <header className="profile-hero">
+          <div className="profile-hero-left">
+            <p className="profile-eyebrow">Account Overview</p>
+            <h1 className="profile-name">{profile.fullName}</h1>
 
-    if (!isMembershipActive(membership)) {
-      return res.json({
-        success: false,
-        message: "Гишүүнчлэл хүчингүй",
-      });
-    }
+            <div className="profile-owner-row">
+              <span className="profile-owner-line"></span>
+              <p>Verified Premium Owner</p>
+            </div>
+          </div>
 
-    const email = getEmailFromRow(found);
+          <div className="profile-hero-right">
+            <p className="profile-mini-label">Membership ID</p>
+            <p className="profile-membership-id">{profile.membershipId}</p>
+          </div>
+        </header>
 
-    if (!email) {
-      return res.json({
-        success: false,
-        message: "И-мэйл хаяг бүртгэлгүй байна",
-      });
-    }
+        <section className="profile-grid">
+          <div className="vehicle-card">
+            <div className="vehicle-card-overlay"></div>
 
-    const otp = generateOtp();
-    otpStore.set(inputPhone, otp);
+            <div className="vehicle-top">
+              <h2>Registered Vehicle</h2>
+              <p>Active ownership portfolio</p>
+            </div>
 
-    console.log("OTP:", inputPhone, otp);
-    console.log("SEND TO EMAIL:", email);
+            <div className="vehicle-bottom">
+              <h3>{profile.model}</h3>
 
-    await sendOtpEmail(email, otp, getFirstnameFromRow(found));
+              <div className="vehicle-meta-row">
+                <div>
+                  <span className="vehicle-meta-label">Plate Number</span>
+                  <strong>{profile.plate}</strong>
+                </div>
 
-    return res.json({
-      success: true,
-      message: "OTP код и-мэйлээр илгээгдлээ",
-      emailMasked: maskEmail(email),
-    });
-  } catch (e) {
-    console.error("SEND OTP ERROR:", e);
+                <button className="vehicle-outline-btn">
+                  Service Records
+                </button>
+              </div>
+            </div>
+          </div>
 
-    return res.status(500).json({
-      success: false,
-      message: "OTP илгээж чадсангүй",
-      error: e.message || String(e),
-    });
-  }
-});
+          <div className="profile-side">
+            <div className="contact-card">
+              <div className="contact-icon">⌕</div>
 
-// ===== VERIFY OTP =====
-app.get("/verify-otp", async (req, res) => {
-  try {
-    const { phone, otp } = req.query;
+              <div className="contact-block">
+                <p className="profile-mini-label">Primary Contact</p>
+                <p className="contact-value">{profile.maskedPhone}</p>
+              </div>
 
-    const p = normalizePhone(phone);
-    const o = clean(otp);
+              <div className="contact-block">
+                <p className="profile-mini-label">Email Association</p>
+                <p className="contact-email">{profile.email}</p>
+              </div>
+            </div>
 
-    if (!p || !o) {
-      return res.json({
-        success: false,
-        message: "Мэдээлэл дутуу",
-      });
-    }
+            <div className="membership-card">
+              <div className="membership-top-row">
+                <span className="membership-badge">✦</span>
+                <span className="membership-legacy">LEGACY</span>
+              </div>
 
-    if (!otpStore.has(p)) {
-      return res.json({
-        success: false,
-        message: "OTP хугацаа дууссан",
-      });
-    }
+              <h4>
+                Premium
+                <br />
+                Access
+              </h4>
 
-    if (otpStore.get(p) !== o) {
-      return res.json({
-        success: false,
-        message: "OTP код буруу",
-      });
-    }
+              <div className="membership-bottom-row">
+                <p>{profile.membership}</p>
+                <span>→</span>
+              </div>
+            </div>
+          </div>
+        </section>
 
-    otpStore.delete(p);
+        <section className="profile-info-grid">
+          <div className="info-column">
+            <h5>Security</h5>
+            <ul>
+              <li>Biometric Authentication</li>
+              <li>Encryption Keys</li>
+            </ul>
+          </div>
 
-    const found = await findUserByPhone(p);
+          <div className="info-column">
+            <h5>Preferences</h5>
+            <ul>
+              <li>Concierge Language</li>
+              <li>Unit System</li>
+            </ul>
+          </div>
 
-    if (!found) {
-      return res.json({
-        success: false,
-        message: "Бүртгэлгүй хэрэглэгч",
-      });
-    }
+          <div className="info-column">
+            <h5>Documents</h5>
+            <ul>
+              <li>Digital Warranty</li>
+              <li>Ownership Certificate</li>
+            </ul>
+          </div>
+        </section>
 
-    const membership = getMembershipFromRow(found);
+        <section className="profile-concierge-cta">
+          <div className="profile-concierge-copy">
+            <h3>The Lexus Concierge</h3>
+            <p>
+              Personalized assistance for your {profile.model}, including
+              maintenance scheduling and premium owner support.
+            </p>
+          </div>
 
-    if (!isMembershipActive(membership)) {
-      return res.json({
-        success: false,
-        message: "Гишүүнчлэл хүчингүй",
-      });
-    }
+          <Link to="/service" className="profile-cta-btn">
+            Contact Personal Assistant
+          </Link>
+        </section>
+      </main>
 
-    return res.json({
-      success: true,
-      user: {
-        model: getModelFromRow(found),
-        ownerDate: getOwnerDateFromRow(found),
-        lastname: getLastnameFromRow(found),
-        firstname: getFirstnameFromRow(found),
-        phone: getPhoneFromRow(found),
-        email: getEmailFromRow(found),
-        membership,
-      },
-    });
-  } catch (e) {
-    console.error("VERIFY OTP ERROR:", e);
+      <footer className="profile-footer">
+        <div className="profile-footer-logo">LEXUS MONGOLIA</div>
 
-    return res.status(500).json({
-      success: false,
-      message: "Server алдаа",
-      error: e.message || String(e),
-    });
-  }
-});
+        <div className="profile-footer-links">
+          <a href="/">Privacy</a>
+          <a href="/">Terms</a>
+          <a href="/">Contact</a>
+        </div>
 
-// ===== START SERVER =====
-app.listen(PORT, () => {
-  console.log(`🚀 Backend running on port ${PORT}`);
-});
+        <div className="profile-footer-copy">
+          © 2024 LEXUS MONGOLIA. ALL RIGHTS RESERVED.
+        </div>
+      </footer>
+    </div>
+  );
+}
