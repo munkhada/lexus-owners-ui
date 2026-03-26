@@ -1,3 +1,4 @@
+import "./Home.css";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -28,27 +29,17 @@ export default function Home() {
 
   const profile = useMemo(() => {
     const firstname =
-      user?.firstname ||
-      user?.firstName ||
-      user?.name ||
-      "Owner";
+      user?.firstname || user?.firstName || user?.name || "Owner";
 
-    const lastname =
-      user?.lastname ||
-      user?.lastName ||
-      "";
+    const lastname = user?.lastname || user?.lastName || "";
 
     const fullName =
       `${lastname ? `${lastname}, ` : ""}${firstname}`.trim() || "Lexus Owner";
 
     const model =
-      user?.model ||
-      user?.vehicle ||
-      user?.car_model ||
-      "LEXUS LX 600";
+      user?.model || user?.vehicle || user?.car_model || "LEXUS LX 600";
 
-    const membership =
-      user?.membership || "Elite";
+    const membership = user?.membership || "Elite";
 
     return {
       fullName: fullName.toUpperCase(),
