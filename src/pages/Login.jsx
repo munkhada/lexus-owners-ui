@@ -1,3 +1,4 @@
+import "./Login.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -87,27 +88,27 @@ export default function Login() {
 
       <div className="login-container">
         <div className="login-left">
-          <p className="tag">VERIFIED COLLECTIVE</p>
+          <p className="login-tag">VERIFIED COLLECTIVE</p>
 
-          <h1 className="title">
+          <h1 className="login-title">
             Welcome to the <br />
             <span>Lexus Mongolia</span>
             <br />
             Collective
           </h1>
 
-          <p className="desc">
+          <p className="login-desc">
             Private access for verified owners only. A digital sanctuary for
             those who demand precision.
           </p>
         </div>
 
         <div className="login-right">
-          <p className="small">AUTHENTICATION REQUIRED</p>
+          <p className="login-small">AUTHENTICATION REQUIRED</p>
 
           {step === 1 ? (
             <form onSubmit={sendOtp}>
-              <div className="input-line">
+              <div className="login-input-line">
                 <span>+976</span>
                 <input
                   placeholder="00 000 000"
@@ -116,15 +117,15 @@ export default function Login() {
                 />
               </div>
 
-              {error && <p className="error">{error}</p>}
+              {error && <p className="login-error">{error}</p>}
 
-              <button className="btn" disabled={loading}>
+              <button className="login-btn" disabled={loading}>
                 {loading ? "CHECKING..." : "LOGIN"} →
               </button>
             </form>
           ) : (
             <form onSubmit={verifyOtp}>
-              <div className="input-line">
+              <div className="login-input-line">
                 <input
                   placeholder="OTP CODE"
                   value={otp}
@@ -132,20 +133,11 @@ export default function Login() {
                 />
               </div>
 
-              <p
-                style={{
-                  color: "#888",
-                  fontSize: "13px",
-                  marginTop: "-10px",
-                  marginBottom: "16px",
-                }}
-              >
-                Туршилтын OTP: 123456
-              </p>
+              <p className="login-hint">Туршилтын OTP: 123456</p>
 
-              {error && <p className="error">{error}</p>}
+              {error && <p className="login-error">{error}</p>}
 
-              <button className="btn" disabled={loading}>
+              <button className="login-btn" disabled={loading}>
                 {loading ? "VERIFYING..." : "LOGIN"} →
               </button>
             </form>
