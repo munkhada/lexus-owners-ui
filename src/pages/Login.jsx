@@ -29,6 +29,7 @@ export default function Login() {
     try {
       setLoading(true);
 
+      // Google Sheet дээр байгаа эсэхийг л шалгана
       const res = await fetch(
         `${API}/check-phone?phone=${encodeURIComponent(normalized)}`
       );
@@ -39,16 +40,7 @@ export default function Login() {
         return;
       }
 
-      const otpRes = await fetch(
-        `${API}/send-otp?phone=${encodeURIComponent(normalized)}`
-      );
-      const otpData = await otpRes.json();
-
-      if (!otpData.success) {
-        setError("OTP илгээж чадсангүй");
-        return;
-      }
-
+      // OTP илгээхгүй, шууд 2-р алхам руу орно
       setPhone(normalized);
       setStep(2);
     } catch {
@@ -62,20 +54,41 @@ export default function Login() {
     e.preventDefault();
     setError("");
 
+    const normalizedOtp = onlyDigits(otp);
+
+    // Туршилтын OTP
+    if (normalizedOtp !== "123456") {
+      setError("OTP буруу байна");
+      return;
+    }
+
     try {
       setLoading(true);
 
+      // User мэдээллийг backend-ээс авах
       const res = await fetch(
-        `${API}/verify-otp?phone=${phone}&otp=${otp}`
+        `${API}/check-phone?phone=${encodeURIComponent(phone)}`
       );
       const data = await res.json();
 
       if (!data.success) {
-        setError("Буруу OTP");
+        setError(data.message || "Нэвтрэх боломжгүй");
         return;
       }
 
-      localStorage.setItem("user", JSON.stringify(data.user));
+      // check-phone дээр user ирвэл тэрийг хадгална
+      // user ирэхгүй бол fallback demo object үүсгэнэ
+      const user =
+        data.user ||
+        data.customer ||
+        data.row || {
+          name: data.name || "Lexus Owner",
+          phone: phone,
+          model: data.model || "Lexus",
+          membership: data.membership || "Owner",
+        };
+
+      localStorage.setItem("user", JSON.stringify(user));
       navigate("/home");
     } catch {
       setError("Алдаа гарлаа");
@@ -89,7 +102,6 @@ export default function Login() {
       <div className="login-bg"></div>
 
       <div className="login-container">
-        {/* LEFT */}
         <div className="login-left">
           <p className="tag">VERIFIED COLLECTIVE</p>
 
@@ -106,7 +118,6 @@ export default function Login() {
           </p>
         </div>
 
-        {/* RIGHT */}
         <div className="login-right">
           <p className="small">AUTHENTICATION REQUIRED</p>
 
@@ -117,16 +128,14 @@ export default function Login() {
                 <input
                   placeholder="00 000 000"
                   value={phone}
-                  onChange={(e) =>
-                    setPhone(onlyDigits(e.target.value))
-                  }
+                  onChange={(e) => setPhone(onlyDigits(e.target.value))}
                 />
               </div>
 
               {error && <p className="error">{error}</p>}
 
-              <button className="btn">
-                {loading ? "SENDING..." : "LOGIN"} →
+              <button className="btn" disabled={loading}>
+                {loading ? "CHECKING..." : "LOGIN"} →
               </button>
             </form>
           ) : (
@@ -139,9 +148,20 @@ export default function Login() {
                 />
               </div>
 
+              <p
+                style={{
+                  color: "#888",
+                  fontSize: "13px",
+                  marginTop: "-10px",
+                  marginBottom: "16px",
+                }}
+              >
+                Туршилтын OTP: 123456
+              </p>
+
               {error && <p className="error">{error}</p>}
 
-              <button className="btn">
+              <button className="btn" disabled={loading}>
                 {loading ? "VERIFYING..." : "LOGIN"} →
               </button>
             </form>
