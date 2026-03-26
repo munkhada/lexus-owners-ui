@@ -3,7 +3,7 @@ import cors from "cors";
 import nodemailer from "nodemailer";
 import { GoogleSpreadsheet } from "google-spreadsheet";
 import { JWT } from "google-auth-library";
-<div className="profile-page">
+
   
 
 const app = express();
