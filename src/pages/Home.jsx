@@ -70,9 +70,9 @@ export default function Home() {
           <Link to="/home" className="active">
             Home
           </Link>
-          <Link to="/Profile">Profile</Link>
-          <Link to="/Service">Concierge</Link>
-          <Link to="/Promo">Benefits</Link>
+          <Link to="/profile">Profile</Link>
+          <Link to="/service">Concierge</Link>
+          <Link to="/promo">Benefits</Link>
         </div>
 
         <button className="home-account-btn" onClick={logout}>
