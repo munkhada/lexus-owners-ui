@@ -29,7 +29,6 @@ export default function Login() {
     try {
       setLoading(true);
 
-      // Google Sheet дээр байгаа эсэхийг л шалгана
       const res = await fetch(
         `${API}/check-phone?phone=${encodeURIComponent(normalized)}`
       );
@@ -40,7 +39,6 @@ export default function Login() {
         return;
       }
 
-      // OTP илгээхгүй, шууд 2-р алхам руу орно
       setPhone(normalized);
       setStep(2);
     } catch {
@@ -56,7 +54,6 @@ export default function Login() {
 
     const normalizedOtp = onlyDigits(otp);
 
-    // Туршилтын OTP
     if (normalizedOtp !== "123456") {
       setError("OTP буруу байна");
       return;
@@ -65,7 +62,6 @@ export default function Login() {
     try {
       setLoading(true);
 
-      // User мэдээллийг backend-ээс авах
       const res = await fetch(
         `${API}/check-phone?phone=${encodeURIComponent(phone)}`
       );
@@ -76,19 +72,7 @@ export default function Login() {
         return;
       }
 
-      // check-phone дээр user ирвэл тэрийг хадгална
-      // user ирэхгүй бол fallback demo object үүсгэнэ
-      const user =
-        data.user ||
-        data.customer ||
-        data.row || {
-          name: data.name || "Lexus Owner",
-          phone: phone,
-          model: data.model || "Lexus",
-          membership: data.membership || "Owner",
-        };
-
-      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("user", JSON.stringify(data.user));
       navigate("/home");
     } catch {
       setError("Алдаа гарлаа");
@@ -107,7 +91,7 @@ export default function Login() {
 
           <h1 className="title">
             Welcome to the <br />
-            <span>Lexus Munkhada</span>
+            <span>Lexus Mongolia</span>
             <br />
             Collective
           </h1>
