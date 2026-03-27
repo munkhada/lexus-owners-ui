@@ -1,9 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useMemo, useState } from "react";
 import "./profile.css";
 
 export default function Profile() {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const [manualOpen, setManualOpen] = useState(false);
 
   const model =
     user?.model ||
@@ -57,6 +59,19 @@ export default function Profile() {
 
     return "/LX.jpg";
   };
+
+  const manualUrl = useMemo(() => {
+    const m = String(model).toLowerCase();
+
+    if (m.includes("gx")) return "https://heyzine.com/flip-book/b2bfd2fd3b.html";
+    if (m.includes("rx350h")) return "https://heyzine.com/flip-book/82883d2628.html";
+    if (m.includes("rx350")) return "https://heyzine.com/flip-book/08e87f3b55.html";
+    if (m.includes("rx500")) return "https://heyzine.com/flip-book/e15cbff4f9.html";
+    if (m.includes("lx")) return "https://heyzine.com/flip-book/78a93d8ca6.html";
+    if (m.includes("nx")) return "https://heyzine.com/flip-book/0faf118dd8.html";
+
+    return "";
+  }, [model]);
 
   const logout = () => {
     localStorage.removeItem("user");
@@ -119,7 +134,16 @@ export default function Profile() {
                   <strong>{vinNumber}</strong>
                 </div>
 
-                <button className="vehicle-outline-btn">
+                <button
+                  className="vehicle-outline-btn"
+                  onClick={() => {
+                    if (manualUrl) {
+                      setManualOpen(true);
+                    } else {
+                      alert("Энэ загварт гарын авлага бүртгэгдээгүй байна.");
+                    }
+                  }}
+                >
                   ЗАСВАРЫН ТҮҮХ
                 </button>
               </div>
@@ -215,6 +239,41 @@ export default function Profile() {
           © 2024 LEXUS MONGOLIA. ALL RIGHTS RESERVED.
         </div>
       </footer>
+
+      {manualOpen && (
+        <div className="manual-overlay" onClick={() => setManualOpen(false)}>
+          <div className="manual-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="manual-header">
+              <h4>{String(model).toUpperCase()} ГАРЫН АВЛАГА</h4>
+              <div className="manual-actions">
+                <a
+                  href={manualUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="manual-open-link"
+                >
+                  ШИНЭ ЦОНХООР НЭЭХ
+                </a>
+                <button
+                  className="manual-close-btn"
+                  onClick={() => setManualOpen(false)}
+                >
+                  ХААХ
+                </button>
+              </div>
+            </div>
+
+            <div className="manual-body">
+              <iframe
+                src={manualUrl}
+                title="Heyzine Manual"
+                className="manual-iframe"
+                allow="fullscreen"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
