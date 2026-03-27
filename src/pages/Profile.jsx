@@ -30,7 +30,13 @@ export default function Profile() {
   const email =
     user?.email ||
     user?.["И-мэйл хаяг"] ||
-    "b.erdene@lexus-owner.mn";
+    "xxxxx@xxxxxxx";
+  
+  const vinNumber =
+  user?.vin ||
+  user?.vinNumber ||
+  user?.["Vin number"] ||
+  "VIN NOT FOUND";
 
   const getCarImage = (value) => {
     if (!value) return "/LX.jpg";
@@ -109,9 +115,9 @@ export default function Profile() {
 
               <div className="vehicle-meta-row">
                 <div>
-                  <span className="vehicle-meta-label">PLATE NUMBER</span>
-                  <strong>0001 UBZ</strong>
-                </div>
+  <span className="vehicle-meta-label">VIN NUMBER</span>
+  <strong>{vinNumber}</strong>
+</div>
 
                 <button className="vehicle-outline-btn">
                   SERVICE RECORDS
