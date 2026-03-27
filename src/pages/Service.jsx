@@ -172,7 +172,10 @@ export default function Service() {
             <a className="service-big-action" href={`tel:${advisor.phone}`}>
               {advisor.phone} ДУГААР РУУ ЗАЛГАХ
             </a>
-            <a className="service-big-action secondary" href={`mailto:${advisor.email}`}>
+            <a
+              className="service-big-action secondary"
+              href={`mailto:${advisor.email}`}
+            >
               {advisor.email} РУУ ИЛГЭЭХ
             </a>
           </div>
