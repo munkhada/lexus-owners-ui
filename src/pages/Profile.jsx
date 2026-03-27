@@ -30,7 +30,7 @@ export default function Profile() {
   const email =
     user?.email ||
     user?.["И-мэйл хаяг"] ||
-    "xxxxx@xxxxxxx";
+   "b.erdene@lexus-owner.mn";
   
   const vinNumber =
   user?.vin ||
