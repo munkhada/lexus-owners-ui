@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Home() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [showWomensPopup, setShowWomensPopup] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem("user");
@@ -150,7 +151,9 @@ export default function Home() {
         </section>
 
         <section className="home-feature-section">
-          <div className="home-feature-image"></div>
+          <div className="home-feature-image">
+            <img src="/womens.jpg" alt="Womens club" />
+          </div>
 
           <div className="home-feature-copy">
             <h3>
@@ -164,12 +167,15 @@ export default function Home() {
               үйлчилгээ болон тусгай мэдээллийг эндээс хүлээн авна.
             </p>
 
-            <button className="home-feature-btn">ДЭЛГЭРЭНГҮЙ</button>
+            <button
+              className="home-feature-btn"
+              onClick={() => setShowWomensPopup(true)}
+            >
+              ДЭЛГЭРЭНГҮЙ
+            </button>
           </div>
 
-          <div className="home-feature-side-image">
-            <img src="/womens.jpg" alt="Онцлох мэдээлэл" />
-          </div>
+          <div className="home-feature-side-empty"></div>
         </section>
       </main>
 
@@ -194,6 +200,16 @@ export default function Home() {
           © 2024 LEXUS MONGOLIA. ALL RIGHTS RESERVED.
         </div>
       </footer>
+
+      {showWomensPopup && (
+        <div className="popup-overlay" onClick={() => setShowWomensPopup(false)}>
+          <div className="popup-card" onClick={(e) => e.stopPropagation()}>
+            <h4>WOMEN'S CLUB</h4>
+            <p>Тун удахгүй нээгдэнэ.</p>
+            <button onClick={() => setShowWomensPopup(false)}>ХААХ</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
