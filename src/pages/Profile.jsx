@@ -35,7 +35,7 @@ export default function Profile() {
   const vinNumber =
     user?.vinNumber ||
     user?.["Vin number"] ||
-    "VIN NOT FOUND";
+    "Арал олдсонгүй";
 
   const getCarImage = (value) => {
     if (!value) return "/LX.jpg";
@@ -64,19 +64,19 @@ export default function Profile() {
       <div className="profile-bg" />
 
       <nav className="profile-nav">
-        <div className="profile-logo">LEXUS MONGOLIA</div>
+        <div className="profile-logo">LEXUS MMUNKHADA</div>
 
         <div className="profile-nav-links">
-          <Link to="/home">HOME</Link>
+          <Link to="/home">НҮҮР ХУУДАС</Link>
           <Link to="/profile" className="active">
-            PROFILE
+            МИНИЙ ХУУДАС
           </Link>
-          <Link to="/service">CONCIERGE</Link>
-          <Link to="/promo">BENEFITS</Link>
+          <Link to="/service">ТӨЛӨӨЛӨГЧ</Link>
+          <Link to="/promo">УРАМШУУЛАЛ</Link>
         </div>
 
         <button className="profile-account-btn" onClick={logout}>
-          SIGN OUT
+          ГАРАХ
         </button>
       </nav>
 
@@ -92,11 +92,6 @@ export default function Profile() {
             </div>
           </div>
 
-          <div className="profile-hero-right">
-            <p className="profile-mini-label">MEMBERSHIP ID</p>
-            <p className="profile-membership-id">LX-9911-0001</p>
-          </div>
-        </section>
 
         <section className="profile-grid">
           <div
@@ -106,8 +101,8 @@ export default function Profile() {
             <div className="vehicle-card-overlay" />
 
             <div className="vehicle-top">
-              <h2>REGISTERED VEHICLE</h2>
-              <p>Active Subscription Portfolio</p>
+              <h2>ТАНЫ АВТОМАШИН</h2>
+              <p>Бодит зураг биш болно</p>
             </div>
 
             <div className="vehicle-bottom">
@@ -115,13 +110,11 @@ export default function Profile() {
 
               <div className="vehicle-meta-row">
                 <div>
-                  <span className="vehicle-meta-label">VIN NUMBER</span>
+                  <span className="vehicle-meta-label">АРЛЫН ДУГААР</span>
                   <strong>{vinNumber}</strong>
                 </div>
 
-                <button className="vehicle-outline-btn">
-                  SERVICE RECORDS
-                </button>
+               
               </div>
             </div>
           </div>
@@ -131,12 +124,12 @@ export default function Profile() {
               <div className="contact-icon">⌕</div>
 
               <div className="contact-block">
-                <p className="profile-mini-label">PRIMARY CONTACT</p>
+                <p className="profile-mini-label">Утасны дугаар</p>
                 <p className="contact-value">+976 {phone}</p>
               </div>
 
               <div className="contact-block">
-                <p className="profile-mini-label">EMAIL ASSOCIATION</p>
+                <p className="profile-mini-label">И-мейл хаяг</p>
                 <p className="contact-email">{email}</p>
               </div>
             </div>
