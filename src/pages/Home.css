@@ -4,7 +4,6 @@
   background: #0c0c0c;
   color: #f5f5f5;
   overflow-x: hidden;
-  font-family: "Inter", sans-serif;
 }
 
 .home-bg {
@@ -44,7 +43,6 @@
 
 .home-nav-links a {
   color: rgba(255, 255, 255, 0.46);
-  text-decoration: none;
   text-transform: uppercase;
   font-size: 12px;
   font-weight: 700;
@@ -59,10 +57,13 @@
 
 .home-account-btn {
   background: transparent;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.14);
   color: #fff;
-  font-size: 18px;
+  padding: 10px 16px;
   cursor: pointer;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.14em;
 }
 
 .home-main {
@@ -144,7 +145,6 @@
   min-height: 360px;
   padding: 30px;
   color: #fff;
-  text-decoration: none;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -224,9 +224,9 @@
 
 .home-feature-section {
   display: grid;
-  grid-template-columns: 1.1fr 1fr;
+  grid-template-columns: 1fr 0.9fr 0.8fr;
   align-items: center;
-  gap: 0;
+  gap: 28px;
   margin-bottom: 120px;
 }
 
@@ -235,12 +235,6 @@
   background:
     radial-gradient(circle at 40% 45%, rgba(255, 255, 255, 0.08), transparent 20%),
     linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
-}
-
-.home-feature-copy {
-  margin-left: -40px;
-  position: relative;
-  z-index: 2;
 }
 
 .home-feature-copy h3 {
@@ -271,6 +265,21 @@
   cursor: pointer;
 }
 
+.home-feature-side-image {
+  width: 100%;
+  min-height: 420px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.home-feature-side-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  min-height: 420px;
+}
+
 .home-footer {
   padding: 0 36px 34px;
   display: grid;
@@ -299,7 +308,6 @@
 
 .home-footer-links a {
   color: rgba(255, 255, 255, 0.48);
-  text-decoration: none;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.16em;
@@ -315,19 +323,20 @@
   letter-spacing: 0.14em;
 }
 
+@media (max-width: 1200px) {
+  .home-feature-section {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 1100px) {
   .home-hero,
-  .home-feature-section,
   .home-footer {
     grid-template-columns: 1fr;
   }
 
   .home-cards {
     grid-template-columns: 1fr;
-  }
-
-  .home-feature-copy {
-    margin-left: 0;
   }
 
   .home-title {
