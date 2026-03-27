@@ -3,30 +3,79 @@ import "./service.css";
 
 export default function Service() {
   const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
 
   const logout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("loginExpiresAt");
     navigate("/");
   };
+
+  const advisorNameRaw =
+    user?.advisor ||
+    user?.["Лексусын төлөөлөгч"] ||
+    "Т.Цэцэнхүү";
+
+  const advisorName = String(advisorNameRaw).trim();
+
+  const getAdvisorData = (name) => {
+    const n = name.toLowerCase().replace(/\s+/g, "");
+
+    if (n.includes("жавхлан")) {
+      return {
+        name: "Б.Жавхлан",
+        phone: "99991514",
+        email: "javkhlan@munkhada.com",
+        image: "/Javkhlan.jpg",
+      };
+    }
+
+    if (n.includes("цэцэнхүү")) {
+      return {
+        name: "Т.Цэцэнхүү",
+        phone: "99994214",
+        email: "tsetsenkhuu@munkhada.com",
+        image: "/Tsetsenkhuu.jpg",
+      };
+    }
+
+    if (n.includes("хулан")) {
+      return {
+        name: "Т.Хулан",
+        phone: "99998997",
+        email: "khulan@munkhada.com",
+        image: "/Khulan.jpg",
+      };
+    }
+
+    return {
+      name: advisorName || "Лексусын төлөөлөгч",
+      phone: "99994214",
+      email: "tsetsenkhuu@munkhada.com",
+      image: "/Tsetsenkhuu.jpg",
+    };
+  };
+
+  const advisor = getAdvisorData(advisorName);
 
   return (
     <div className="service-page">
       <div className="service-bg" />
 
       <nav className="service-nav">
-        <div className="service-logo">LEXUS MONGOLIA</div>
+        <div className="service-logo">LEXUS MUNKHADA</div>
 
         <div className="service-nav-links">
-          <Link to="/home">HOME</Link>
-          <Link to="/profile">PROFILE</Link>
+          <Link to="/home">НҮҮР ХУУДАС</Link>
+          <Link to="/profile">МИНИЙ ХУУДАС</Link>
           <Link to="/service" className="active">
-            CONCIERGE
+            ТӨЛӨӨЛӨГЧ
           </Link>
-          <Link to="/promo">BENEFITS</Link>
+          <Link to="/promo">УРАМШУУЛАЛ</Link>
         </div>
 
         <button className="service-account-btn" onClick={logout}>
-          ○
+          ГАРАХ
         </button>
       </nav>
 
@@ -34,148 +83,120 @@ export default function Service() {
         <section className="service-hero">
           <div className="service-hero-left">
             <h1>
-              ALWAYS
+              ТАНТАЙ
               <br />
-              AT YOUR
+              ХОЛБОГДСОН
               <br />
-              SERVICE.
+              ТӨЛӨӨЛӨГЧ
             </h1>
 
             <p>
-              Experience the ultimate expression of Omotenashi. Our concierge
-              team is dedicated to providing seamless assistance across
-              Mongolia.
+              Таны автомашинтай холбоотой үйлчилгээ, зөвлөгөө, мэдээллийг
+              хариуцсан Лексусын төлөөлөгчийн мэдээлэл.
             </p>
           </div>
 
           <div className="service-hero-right">
-            <p className="service-status-label">STATUS</p>
-            <p className="service-status-value">● 24/7 PRIORITY ACTIVE</p>
+            <p className="service-status-label">ТӨЛӨВ</p>
+            <p className="service-status-value">● ИДЭВХТЭЙ</p>
           </div>
         </section>
 
-        <section className="service-roadside-card">
-          <div className="service-roadside-image" />
+        <section className="service-advisor-card">
+          <div
+            className="service-advisor-image"
+            style={{ backgroundImage: `url(${advisor.image})` }}
+          />
 
-          <div className="service-roadside-overlay">
-            <div>
-              <h2>Roadside Assistance</h2>
-              <p>
-                Immediate support for any vehicle incident, anywhere in
-                Mongolia. Our recovery fleet is dispatched instantly.
+          <div className="service-advisor-overlay">
+            <div className="service-advisor-copy">
+              <p className="service-advisor-label">ТАНЫ ХАРИУЦСАН ТӨЛӨӨЛӨГЧ</p>
+              <h2>{advisor.name}</h2>
+              <p className="service-advisor-subtext">
+                Танд үйлчилгээ, зөвлөгөө, мэдээлэл хүргэх үндсэн төлөөлөгч
               </p>
-            </div>
 
-            <button>REQUEST IMMEDIATE AID</button>
-          </div>
-        </section>
+              <div className="service-advisor-meta">
+                <div>
+                  <span>УТАС</span>
+                  <strong>{advisor.phone}</strong>
+                </div>
 
-        <section className="service-dual-grid">
-          <div className="service-info-card">
-            <div className="service-icon">◫</div>
-            <h3>Service Concierge</h3>
-            <p>
-              Maintain the peak performance of your Lexus. Schedule your
-              seasonal maintenance or valet pick-up service directly.
-            </p>
-
-            <div className="service-actions-row">
-              <a href="/">SCHEDULE MAINTENANCE →</a>
-            </div>
-          </div>
-
-          <div className="service-info-card">
-            <div className="service-icon">◪</div>
-            <h3>Private Consultant</h3>
-            <p>
-              A dedicated Lexus representative ready to assist with technical
-              queries, ownership benefits, or lifestyle requests.
-            </p>
-
-            <div className="service-actions-row">
-              <a href="/">CALL REPRESENTATIVE</a>
-              <a href="/">DIRECT CHAT</a>
-            </div>
-          </div>
-        </section>
-
-        <section className="service-centers-section">
-          <div className="service-centers-copy">
-            <div>
-              <h3>Lexus Service Centers</h3>
-            </div>
-
-            <div>
-              <p>
-                Certified facilities equipped with the latest diagnostic
-                technology and staffed by Lexus-trained technicians in
-                Ulaanbaatar.
-              </p>
-              <button>VIEW ALL MAP LOCATIONS</button>
-            </div>
-          </div>
-
-          <div className="service-centers-grid">
-            <div className="service-center-card">
-              <div className="service-center-image service-center-image-1" />
-              <div className="service-center-text">
-                <h4>Lexus Ulaanbaatar Central</h4>
-                <p>
-                  Khan-Uul District, 15th Khoroo, Mahatma Gandhi Street
-                </p>
-                <span>OPEN 09:00 - 20:00</span>
+                <div>
+                  <span>И-МЭЙЛ</span>
+                  <strong>{advisor.email}</strong>
+                </div>
               </div>
             </div>
 
-            <div className="service-center-card">
-              <div className="service-center-image service-center-image-2" />
-              <div className="service-center-text">
-                <h4>Bayanzurkh Service Hub</h4>
-                <p>Bayanzurkh District, Peace Avenue 45</p>
-                <span>OPEN 10:00 - 19:00</span>
-              </div>
-            </div>
-
-            <div className="service-center-card map-card">
-              <div className="service-center-image service-center-image-3" />
-              <div className="service-center-map-label">INTERACTIVE MAP</div>
+            <div className="service-advisor-actions">
+              <a className="service-call-btn" href={`tel:${advisor.phone}`}>
+                ЗАЛГАХ
+              </a>
+              <a className="service-mail-btn" href={`mailto:${advisor.email}`}>
+                И-МЭЙЛ ИЛГЭЭХ
+              </a>
             </div>
           </div>
         </section>
 
-        <section className="service-master-section">
-          <div className="service-master-image">
-            <div className="service-master-overlay-card">
-              <h4>Master Craftsmanship</h4>
-              <p>
-                Every service is performed by Takumi-trained technicians using
-                only genuine Lexus components, ensuring your vehicle remains
-                exactly as intended.
-              </p>
-              <span />
-            </div>
+        <section className="service-info-grid">
+          <div className="service-info-card">
+            <div className="service-icon">⌕</div>
+            <h3>Холбоо барих</h3>
+            <p>
+              Та өөрийн хариуцсан төлөөлөгчтэй шууд холбогдож үйлчилгээтэй
+              холбоотой мэдээлэл авч болно.
+            </p>
+          </div>
+
+          <div className="service-info-card">
+            <div className="service-icon">✦</div>
+            <h3>Үйлчилгээний зөвлөгөө</h3>
+            <p>
+              Засвар үйлчилгээ, дагалдах хэрэгсэл, автомашины зөвлөмжийн талаар
+              мэдээлэл авах боломжтой.
+            </p>
+          </div>
+        </section>
+
+        <section className="service-contact-panel">
+          <div className="service-contact-left">
+            <h3>ШУУД ХОЛБОО БАРИХ</h3>
+            <p>
+              Доорх товчоор утасдах эсвэл и-мэйл илгээх боломжтой.
+            </p>
+          </div>
+
+          <div className="service-contact-right">
+            <a className="service-big-action" href={`tel:${advisor.phone}`}>
+              {advisor.phone} ДУГААР РУУ ЗАЛГАХ
+            </a>
+            <a className="service-big-action secondary" href={`mailto:${advisor.email}`}>
+              {advisor.email} РУУ ИЛГЭЭХ
+            </a>
           </div>
         </section>
       </main>
 
       <footer className="service-footer">
-        <div className="service-footer-brand">LEXUS</div>
+        <div className="service-footer-brand">LEXUS MUNKHADA</div>
 
         <div className="service-footer-grid">
           <div>
-            <a href="/">PRIVACY POLICY</a>
-            <a href="/">TERMS OF SERVICE</a>
-            <a href="/">CONTACT US</a>
+            <a href="/">НУУЦЛАЛ</a>
+            <a href="/">НӨХЦӨЛ</a>
+            <a href="/">ХОЛБОО БАРИХ</a>
           </div>
 
           <div>
-            <p>ULAANBAATAR OFFICE</p>
-            <span>Sukhbaatar Square 2, Central Tower, 12th Floor</span>
+            <p>ТӨЛӨӨЛӨГЧ</p>
+            <span>{advisor.name}</span>
           </div>
 
           <div>
-            <p>HOTLINE</p>
-            <strong>+976 11 313313</strong>
+            <p>УТАС</p>
+            <strong>{advisor.phone}</strong>
           </div>
         </div>
 
