@@ -61,9 +61,9 @@ export default function Home() {
           <Link to="/home" className="active">
             Home
           </Link>
-          <Link to="/profile">Profile</Link>
-          <Link to="/service">Concierge</Link>
-          <Link to="/promo">Benefits</Link>
+          <Link to="/profile">Миний хуудас</Link>
+          <Link to="/service">Төлөөлөгч</Link>
+          <Link to="/promo">Урамшуулал</Link>
         </div>
 
         <button className="home-account-btn" onClick={logout}>
@@ -88,14 +88,14 @@ export default function Home() {
 
           <aside className="home-summary-card">
             <div className="home-summary-block">
-              <div className="home-summary-label">Current Vehicle</div>
+              <div className="home-summary-label">Таны машин</div>
               <div className="home-summary-value">{profile.model}</div>
             </div>
 
             <div className="home-summary-divider"></div>
 
             <div className="home-summary-block">
-              <div className="home-summary-label">Membership Level</div>
+              <div className="home-summary-label">Гишүүнчлэл</div>
               <div className="home-summary-value">★ {profile.membership}</div>
             </div>
           </aside>
