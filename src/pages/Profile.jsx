@@ -64,7 +64,7 @@ export default function Profile() {
       <div className="profile-bg" />
 
       <nav className="profile-nav">
-        <div className="profile-logo">LEXUS MONGOLIA</div>
+        <div className="profile-logo">LEXUS MUNKHADA</div>
 
         <div className="profile-nav-links">
           <Link to="/home">HOME</Link>
@@ -92,11 +92,7 @@ export default function Profile() {
             </div>
           </div>
 
-          <div className="profile-hero-right">
-            <p className="profile-mini-label">MEMBERSHIP ID</p>
-            <p className="profile-membership-id">LX-9911-0001</p>
-          </div>
-        </section>
+          
 
         <section className="profile-grid">
           <div
