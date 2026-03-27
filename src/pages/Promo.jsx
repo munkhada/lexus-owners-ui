@@ -74,7 +74,7 @@ export default function Promo() {
         <section className="benefits-card-grid">
           <div className="benefits-mini-card-item">
             <div className="benefits-mini-media">
-              <img src="/airport lounge.jpg" alt="Airport Lounge" />
+              <img src="/airport.jpg" alt="Airport Lounge" />
               <div className="benefits-mini-overlay">
                 <span>TEST</span>
               </div>
@@ -92,7 +92,7 @@ export default function Promo() {
 
           <div className="benefits-mini-card-item">
             <div className="benefits-mini-media">
-              <img src="/cryo.jpg" alt="Cryo" />
+              <img src="/cryo mongolia.jpg" alt="Cryo" />
               <div className="benefits-mini-overlay">
                 <span>TEST</span>
               </div>
