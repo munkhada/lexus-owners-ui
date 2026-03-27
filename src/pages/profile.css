@@ -1,3 +1,474 @@
+.profile-page {
+  min-height: 100vh;
+  position: relative;
+  background: #0b0b0b;
+  color: #f2f2f2;
+  overflow-x: hidden;
+}
+
+.profile-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 12%, rgba(255, 255, 255, 0.04), transparent 22%),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.015), transparent 20%),
+    #0b0b0b;
+  pointer-events: none;
+}
+
+.profile-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 36px;
+  background: rgba(10, 10, 10, 0.88);
+  backdrop-filter: blur(14px);
+}
+
+.profile-logo {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.profile-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+}
+
+.profile-nav-links a {
+  color: rgba(255, 255, 255, 0.48);
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.profile-nav-links a:hover,
+.profile-nav-links a.active {
+  color: #fff;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 4px;
+}
+
+.profile-account-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #fff;
+  padding: 10px 16px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+}
+
+.profile-main {
+  position: relative;
+  z-index: 2;
+  padding: 34px 36px 80px;
+}
+
+.profile-hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-bottom: 42px;
+}
+
+.profile-eyebrow {
+  margin: 0 0 16px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.36em;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.profile-name {
+  margin: 0;
+  font-size: 64px;
+  line-height: 0.95;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.profile-owner-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 34px;
+}
+
+.profile-owner-line {
+  width: 38px;
+  height: 1px;
+  background: #fff;
+  display: inline-block;
+}
+
+.profile-owner-row p {
+  margin: 0;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.profile-mini-label {
+  margin: 0 0 8px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(320px, 0.9fr);
+  gap: 36px;
+  align-items: stretch;
+}
+
+.vehicle-card {
+  position: relative;
+  min-height: 450px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.vehicle-card-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.75)),
+    radial-gradient(circle at 65% 35%, rgba(255, 255, 255, 0.08), transparent 28%);
+  pointer-events: none;
+}
+
+.vehicle-top,
+.vehicle-bottom {
+  position: relative;
+  z-index: 2;
+  padding: 36px;
+}
+
+.vehicle-bottom {
+  margin-top: auto;
+}
+
+.vehicle-top h2 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+
+.vehicle-top p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+}
+
+.vehicle-bottom h3 {
+  margin: 0 0 18px;
+  font-size: 60px;
+  line-height: 0.95;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  color: #fff;
+}
+
+.vehicle-meta-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 26px;
+  flex-wrap: wrap;
+}
+
+.vehicle-meta-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.vehicle-meta-row strong {
+  font-size: 26px;
+  letter-spacing: 0.08em;
+  color: #fff;
+}
+
+.vehicle-outline-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #fff;
+  padding: 12px 22px;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+}
+
+.profile-side {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.contact-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 34px;
+  min-height: 216px;
+}
+
+.contact-icon {
+  font-size: 24px;
+  margin-bottom: 28px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.contact-block + .contact-block {
+  margin-top: 30px;
+}
+
+.contact-value {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  color: #fff;
+}
+
+.contact-email {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1.45;
+  color: #fff;
+}
+
+.membership-card {
+  background: #f2f2f2;
+  color: #111;
+  padding: 34px;
+  min-height: 210px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.membership-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.membership-badge {
+  font-size: 18px;
+}
+
+.membership-legacy {
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 800;
+}
+
+.membership-card h4 {
+  margin: 18px 0 0;
+  font-size: 46px;
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+}
+
+.membership-bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 18px;
+}
+
+.membership-bottom-row p {
+  margin: 0;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.membership-bottom-row span {
+  font-size: 24px;
+}
+
+.profile-info-grid {
+  margin-top: 44px;
+  padding-top: 34px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+}
+
+.info-column h5 {
+  margin: 0 0 18px;
+  font-size: 12px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+}
+
+.info-column ul {
+  list-style: none;
+}
+
+.info-column li {
+  color: rgba(255, 255, 255, 0.64);
+  font-size: 16px;
+  line-height: 2;
+}
+
+.profile-concierge-cta {
+  margin-top: 60px;
+  padding-top: 44px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.profile-concierge-copy h3 {
+  margin: 0 0 12px;
+  font-size: 42px;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+}
+
+.profile-concierge-copy p {
+  margin: 0;
+  max-width: 620px;
+  font-size: 18px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.profile-cta-btn {
+  background: #f2f2f2;
+  color: #111;
+  padding: 18px 26px;
+  min-width: 250px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.profile-footer {
+  padding: 70px 36px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile-footer-logo {
+  font-size: 18px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+}
+
+.profile-footer-links {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.profile-footer-links a {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.profile-footer-copy {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+@media (max-width: 1100px) {
+  .profile-grid,
+  .profile-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-concierge-cta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .profile-name {
+    font-size: 48px;
+  }
+
+  .vehicle-bottom h3 {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-nav,
+  .profile-main,
+  .profile-footer {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .profile-nav {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .profile-nav-links {
+    width: 100%;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .profile-name {
+    font-size: 40px;
+  }
+
+  .vehicle-card {
+    min-height: 360px;
+  }
+
+  .vehicle-top,
+  .vehicle-bottom,
+  .contact-card,
+  .membership-card {
+    padding: 24px;
+  }
+}
 .manual-overlay {
   position: fixed;
   inset: 0;
