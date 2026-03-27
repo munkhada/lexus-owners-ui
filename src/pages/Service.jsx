@@ -80,28 +80,6 @@ export default function Service() {
       </nav>
 
       <main className="service-main">
-        <section className="service-hero">
-          <div className="service-hero-left">
-            <h1>
-              ТАНТАЙ
-              <br />
-              ХОЛБОГДСОН
-              <br />
-              ТӨЛӨӨЛӨГЧ
-            </h1>
-
-            <p>
-              Таны автомашинтай холбоотой үйлчилгээ, зөвлөгөө, мэдээллийг
-              хариуцсан Лексусын төлөөлөгчийн мэдээлэл.
-            </p>
-          </div>
-
-          <div className="service-hero-right">
-            <p className="service-status-label">ТӨЛӨВ</p>
-            <p className="service-status-value">● ИДЭВХТЭЙ</p>
-          </div>
-        </section>
-
         <section className="service-advisor-card">
           <div
             className="service-advisor-image"
@@ -157,27 +135,6 @@ export default function Service() {
               Засвар үйлчилгээ, дагалдах хэрэгсэл, автомашины зөвлөмжийн талаар
               мэдээлэл авах боломжтой.
             </p>
-          </div>
-        </section>
-
-        <section className="service-contact-panel">
-          <div className="service-contact-left">
-            <h3>ШУУД ХОЛБОО БАРИХ</h3>
-            <p>
-              Доорх товчоор утасдах эсвэл и-мэйл илгээх боломжтой.
-            </p>
-          </div>
-
-          <div className="service-contact-right">
-            <a className="service-big-action" href={`tel:${advisor.phone}`}>
-              {advisor.phone} ДУГААР РУУ ЗАЛГАХ
-            </a>
-            <a
-              className="service-big-action secondary"
-              href={`mailto:${advisor.email}`}
-            >
-              {advisor.email} РУУ ИЛГЭЭХ
-            </a>
           </div>
         </section>
       </main>
