@@ -37,6 +37,11 @@ export default function Profile() {
     user?.["Vin number"] ||
     "VIN NOT FOUND";
 
+  const ownerDate =
+    user?.ownerDate ||
+    user?.["Автомашин хүлээлгэн өгсөн огноо"] ||
+    "Огноо байхгүй";
+
   const getCarImage = (value) => {
     if (!value) return "/LX.jpg";
     const m = String(value).toLowerCase();
@@ -139,17 +144,17 @@ export default function Profile() {
             <div className="membership-card">
               <div className="membership-top-row">
                 <span className="membership-badge">✦</span>
-                <span className="membership-legacy">LEGACY</span>
+                <span className="membership-legacy">ГИШҮҮН</span>
               </div>
 
               <h4>
-                PREMIUM
+                ГИШҮҮНЧЛЭЛ
                 <br />
-                ACCESS
+                ЭХЭЛСЭН ОГНОО
               </h4>
 
               <div className="membership-bottom-row">
-                <p>ДУУСАХ ХУГАЦАА 2025.12</p>
+                <p>{ownerDate}</p>
                 <span>→</span>
               </div>
             </div>
