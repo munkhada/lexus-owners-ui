@@ -76,7 +76,7 @@ export default function Profile() {
         </div>
 
         <button className="profile-account-btn" onClick={logout}>
-          ○
+          SIGN OUT
         </button>
       </nav>
 
