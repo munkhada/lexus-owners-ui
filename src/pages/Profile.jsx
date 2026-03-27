@@ -27,10 +27,10 @@ export default function Profile() {
     user?.["Утасны дугаар"] ||
     "9911XXXX";
 
-  const email =
-    user?.email ||
-    user?.["И-мэйл хаяг"] ||
-    "xxxxx@xxxxxx";
+ const email =
+  user?.email ||
+  user?.["И-мэйл хаяг"] ||
+  "И-мэйл бүртгэлгүй";
 
   const vinNumber =
     user?.vinNumber ||
