@@ -59,14 +59,14 @@ export default function Promo() {
           <div className="benefits-large-feature">
             <img src="/mulounge.jpg" alt="MU Lounge" />
             <div className="benefits-large-overlay">
-              <span>TEST</span>
+              <span>Лексус эзэмшигчдэд зориулсан Мөнххада ХХК байрлах Лексус эзэмшигчийн лоунж</span>
             </div>
           </div>
 
           <div className="benefits-large-feature">
             <img src="/emerge.jpg" alt="Emerge" />
             <div className="benefits-large-overlay">
-              <span>TEST</span>
+              <span>Лексус эзэмшигчдэд зориулсан Зайсан хилл-д байрлах Лексус эмерж төв</span>
             </div>
           </div>
         </section>
