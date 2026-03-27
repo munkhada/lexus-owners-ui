@@ -6,6 +6,7 @@ export default function Promo() {
 
   const logout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("loginExpiresAt");
     navigate("/");
   };
 
@@ -14,38 +15,39 @@ export default function Promo() {
       <div className="benefits-bg" />
 
       <nav className="benefits-nav">
-        <div className="benefits-logo">LEXUS MONGOLIA</div>
+        <div className="benefits-logo">LEXUS MUNKHADA</div>
 
         <div className="benefits-nav-links">
-          <Link to="/home">HOME</Link>
-          <Link to="/profile">PROFILE</Link>
-          <Link to="/service">CONCIERGE</Link>
+          <Link to="/home">НҮҮР ХУУДАС</Link>
+          <Link to="/profile">МИНИЙ ХУУДАС</Link>
+          <Link to="/service">ТӨЛӨӨЛӨГЧ</Link>
           <Link to="/promo" className="active">
-            BENEFITS
+            УРАМШУУЛАЛ
           </Link>
         </div>
 
         <button className="benefits-account-btn" onClick={logout}>
-          ○
+          ГАРАХ
         </button>
       </nav>
 
       <main className="benefits-main">
         <section className="benefits-hero">
           <div className="benefits-hero-left">
-            <p className="benefits-eyebrow">THE LEXUS RESERVE</p>
+            <p className="benefits-eyebrow">LEXUS УРАМШУУЛАЛ</p>
             <h1 className="benefits-title">
-              BEYOND THE
+              ОНЦГОЙ
               <br />
-              STANDARD
+              ДАВУУ
+              <br />
+              ЭРХ
             </h1>
           </div>
 
           <div className="benefits-hero-right">
             <p>
-              Membership is an invitation to a world curated for those who seek
-              precision in every facet of life. Explore your exclusive
-              privileges across Mongolia and beyond.
+              Лексусын эзэмшигчдэд зориулсан тусгай урамшуулал, хөнгөлөлт,
+              урилга, давуу эрхийн мэдээлэл энэ хэсэгт байрлана.
             </p>
           </div>
         </section>
@@ -54,9 +56,9 @@ export default function Promo() {
           <div className="benefits-feature-image" />
 
           <div className="benefits-feature-content">
-            <h2>Private Event Access</h2>
-            <p>ULAANBAATAR — EXCLUSIVE INVITATIONS</p>
-            <button>REQUEST INVITATION</button>
+            <h2>Тусгай урилга</h2>
+            <p>УЛААНБААТАР — ХААЛТТАЙ АРГА ХЭМЖЭЭ</p>
+            <button>УРИЛГА ХҮСЭХ</button>
           </div>
         </section>
 
@@ -64,15 +66,14 @@ export default function Promo() {
           <div className="benefits-left-copy">
             <p className="benefits-section-label">01 / LIFESTYLE</p>
             <h3>
-              Partner
+              ХАМТРАГЧ
               <br />
-              Privileges
+              ДАВУУ ЭРХ
             </h3>
 
             <p className="benefits-section-text">
-              Access a curated network of luxury boutiques, fine dining, and
-              wellness retreats throughout Mongolia. Your Lexus key unlocks more
-              than just your vehicle.
+              Тансаг хэрэглээ, ресторан, аялал, wellness үйлчилгээ болон
+              Лексусын эзэмшигчдэд зориулсан бусад онцгой саналууд.
             </p>
 
             <div className="benefits-links-list">
@@ -84,7 +85,7 @@ export default function Promo() {
           <div className="benefits-lounge-card">
             <div className="benefits-lounge-top">
               <p>Lexus Lounge Access</p>
-              <span>CHINGGIS KHAAN INTERNATIONAL</span>
+              <span>ЧИНГИС ХААН ОЛОН УЛСЫН НИСЭХ БУУДАЛ</span>
             </div>
 
             <div className="benefits-lounge-center">
@@ -95,8 +96,7 @@ export default function Promo() {
             <div className="benefits-mini-card">
               <strong>Seamless Transit</strong>
               <p>
-                Relax in curated comfort before your journey. Complimentary for
-                Black Tier members.
+                Таны аяллыг илүү тухтай, амар болгох тусгай нэвтрэх боломж.
               </p>
             </div>
           </div>
@@ -107,20 +107,19 @@ export default function Promo() {
             <div className="benefits-watermark">LEXUS</div>
 
             <h3>
-              Priority
+              ДАВУУ
               <br />
-              Service Booking
+              ҮЙЛЧИЛГЭЭ
             </h3>
 
             <p>
-              Your time is the ultimate luxury. Experience expedited maintenance
-              and dedicated technical advisors at our Ulaanbaatar service
-              center.
+              Таны цаг хугацааг хэмнэх, илүү тав тухтай үйлчилгээ авах боломжийг
+              Лексусын эзэмшигчдэд зориулан бэлдэв.
             </p>
 
             <div className="benefits-service-actions">
-              <button className="primary-btn">BOOK SERVICE</button>
-              <button className="secondary-btn">CALL CONCIERGE</button>
+              <button className="primary-btn">ҮЙЛЧИЛГЭЭ ЗАХИАЛАХ</button>
+              <button className="secondary-btn">ТӨЛӨӨЛӨГЧТЭЙ ХОЛБОГДОХ</button>
             </div>
           </div>
 
@@ -129,51 +128,57 @@ export default function Promo() {
 
         <section className="benefits-directory">
           <div className="benefits-directory-header">
-            <p className="benefits-section-label">THE FULL DIRECTORY</p>
-            <span>SCROLL TO EXPLORE</span>
+            <p className="benefits-section-label">БҮРЭН ЖАГСААЛТ</p>
+            <span>ДЭЛГЭРЭНГҮЙ ҮЗЭХ</span>
           </div>
 
           <div className="benefits-directory-list">
             <div className="benefits-directory-row">
               <span>01</span>
-              <strong>Complimentary Valet</strong>
-              <p>Premium valet parking at all major luxury venues in Ulaanbaatar.</p>
-              <a href="/">LEARN MORE</a>
+              <strong>Үнэгүй valet үйлчилгээ</strong>
+              <p>
+                Сонгогдсон байршлуудад автомашинаа тухтай, хурдан хүлээлгэн
+                өгөх боломж.
+              </p>
+              <a href="/">ҮЗЭХ</a>
             </div>
 
             <div className="benefits-directory-row">
               <span>02</span>
-              <strong>Seasonal Detailing</strong>
-              <p>Quarterly deep-cleaning and protection treatment for your Lexus.</p>
-              <a href="/">LEARN MORE</a>
+              <strong>Улирлын detailing</strong>
+              <p>
+                Автомашины цэвэрлэгээ, хамгаалалтын тусгай үйлчилгээний санал.
+              </p>
+              <a href="/">ҮЗЭХ</a>
             </div>
 
             <div className="benefits-directory-row">
               <span>03</span>
-              <strong>Exclusive Test Drives</strong>
-              <p>First access to pilot upcoming Lexus models before general release.</p>
-              <a href="/">LEARN MORE</a>
+              <strong>Онцгой test drive</strong>
+              <p>
+                Шинэ загваруудыг бусдаас өмнө туршиж үзэх тусгай боломж.
+              </p>
+              <a href="/">ҮЗЭХ</a>
             </div>
           </div>
         </section>
       </main>
 
       <footer className="benefits-footer">
-        <div className="benefits-footer-brand">LEXUS MONGOLIA</div>
+        <div className="benefits-footer-brand">LEXUS MUNKHADA</div>
 
         <div className="benefits-footer-links">
           <div>
-            <a href="/">EXPERIENCE</a>
-            <a href="/">THE RESERVE</a>
-            <a href="/">INSPIRATIONS</a>
-            <a href="/">HERITAGE</a>
+            <a href="/">ТУРШЛАГА</a>
+            <a href="/">УРАМШУУЛАЛ</a>
+            <a href="/">МЭДЭЭЛЭЛ</a>
+            <a href="/">ӨВ СОЁЛ</a>
           </div>
 
           <div>
-            <a href="/">LEGAL</a>
-            <a href="/">PRIVACY</a>
-            <a href="/">TERMS</a>
-            <a href="/">CONTACT</a>
+            <a href="/">НУУЦЛАЛ</a>
+            <a href="/">НӨХЦӨЛ</a>
+            <a href="/">ХОЛБОО БАРИХ</a>
           </div>
         </div>
 
