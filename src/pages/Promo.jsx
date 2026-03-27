@@ -55,76 +55,76 @@ export default function Promo() {
           </div>
         </section>
 
-        <section className="benefits-top-grid">
-          <div className="benefits-top-left">
-            <div className="benefits-double-card">
-              <div className="benefits-hover-card">
-                <img src="/mulounge.jpg" alt="MU lounge" />
-                <div className="benefits-hover-overlay">
-                  <span>TEST</span>
-                </div>
-              </div>
+        <section className="benefits-feature-row">
+          <div className="benefits-large-feature">
+            <img src="/mulounge.jpg" alt="MU Lounge" />
+            <div className="benefits-large-overlay">
+              <span>TEST</span>
+            </div>
+          </div>
 
-              <div className="benefits-hover-card">
-                <img src="/emerge.jpg" alt="Emerge" />
-                <div className="benefits-hover-overlay">
-                  <span>TEST</span>
-                </div>
+          <div className="benefits-large-feature">
+            <img src="/emerge.jpg" alt="Emerge" />
+            <div className="benefits-large-overlay">
+              <span>TEST</span>
+            </div>
+          </div>
+        </section>
+
+        <section className="benefits-card-grid">
+          <div className="benefits-mini-card-item">
+            <div className="benefits-mini-media">
+              <img src="/airport lounge.jpg" alt="Airport Lounge" />
+              <div className="benefits-mini-overlay">
+                <span>TEST</span>
               </div>
             </div>
           </div>
 
-          <div className="benefits-top-right">
-            <div className="benefits-map-card">
-              <div className="benefits-map-header">
-                <p>MUNKHADA COMPANY</p>
-                <a
-                  href="https://maps.app.goo.gl/XtMS57ZjXTTNUfoo7"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  MAP НЭЭХ
-                </a>
+          <div className="benefits-mini-card-item">
+            <div className="benefits-mini-media">
+              <img src="/owner benefit.jpg" alt="Owner Benefit" />
+              <div className="benefits-mini-overlay">
+                <span>TEST</span>
               </div>
+            </div>
+          </div>
 
-              <div className="benefits-map-frame">
-                <iframe
-                  title="Munkhada Map"
-                  src={mapEmbedUrl}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
+          <div className="benefits-mini-card-item">
+            <div className="benefits-mini-media">
+              <img src="/cryo.jpg" alt="Cryo" />
+              <div className="benefits-mini-overlay">
+                <span>TEST</span>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="benefits-middle-grid">
-          <div className="benefits-small-card">
-            <div className="benefits-small-image">
-              <img src="/airport lounge.jpg" alt="Airport Lounge" />
-              <div className="benefits-small-overlay">
-                <span>TEST</span>
-              </div>
-            </div>
+        <section className="benefits-map-section">
+          <div className="benefits-map-copy">
+            <p className="benefits-section-label">GOOGLE MAP ХАЯГ</p>
+            <h3>MUNKHADA COMPANY</h3>
+            <p>
+              Доорх газрын зураг дээрээс Munkhada компанийн байршлыг харж,
+              шууд map нээх боломжтой.
+            </p>
+            <a
+              className="benefits-map-link"
+              href="https://maps.app.goo.gl/XtMS57ZjXTTNUfoo7"
+              target="_blank"
+              rel="noreferrer"
+            >
+              GOOGLE MAP НЭЭХ
+            </a>
           </div>
 
-          <div className="benefits-small-card">
-            <div className="benefits-small-image">
-              <img src="/owner benefit.jpg" alt="Owner Benefit" />
-              <div className="benefits-small-overlay">
-                <span>TEST</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="benefits-small-card">
-            <div className="benefits-small-image">
-              <img src="/cryo.jpg" alt="Cryo" />
-              <div className="benefits-small-overlay">
-                <span>TEST</span>
-              </div>
-            </div>
+          <div className="benefits-map-card">
+            <iframe
+              title="Munkhada Map"
+              src={mapEmbedUrl}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
         </section>
 
