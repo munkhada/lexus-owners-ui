@@ -4,6 +4,9 @@
   background: #0b0b0b;
   color: #f5f5f5;
   overflow-x: hidden;
+  margin: 0;
+  border: none;
+  outline: none;
 }
 
 .benefits-bg {
@@ -26,6 +29,8 @@
   padding: 24px 36px;
   background: rgba(10, 10, 10, 0.88);
   backdrop-filter: blur(14px);
+  border: none;
+  box-shadow: none;
 }
 
 .benefits-logo {
@@ -47,21 +52,28 @@
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.03em;
+  padding-bottom: 2px;
+  border-bottom: none;
+  box-shadow: none;
 }
 
 .benefits-nav-links a:hover,
 .benefits-nav-links a.active {
   color: #fff;
-  border-bottom: 1px solid #fff;
-  padding-bottom: 4px;
+  border-bottom: none;
+  box-shadow: none;
+  text-decoration: none;
 }
 
 .benefits-account-btn {
   background: transparent;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.14);
   color: #fff;
-  font-size: 18px;
+  padding: 10px 16px;
   cursor: pointer;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.14em;
 }
 
 .benefits-main {
@@ -72,7 +84,7 @@
 
 .benefits-hero {
   display: grid;
-  grid-template-columns: 1.4fr 0.8fr;
+  grid-template-columns: 1.2fr 0.8fr;
   gap: 40px;
   align-items: end;
   margin-bottom: 42px;
@@ -97,7 +109,7 @@
 
 .benefits-hero-right p {
   margin: 0;
-  max-width: 320px;
+  max-width: 380px;
   color: rgba(255, 255, 255, 0.68);
   font-size: 15px;
   line-height: 1.75;
@@ -109,6 +121,7 @@
   margin-bottom: 56px;
   overflow: hidden;
   background: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .benefits-feature-image {
@@ -123,13 +136,13 @@
 .benefits-feature-content {
   position: relative;
   z-index: 2;
-  padding: 220px 18px 28px;
+  padding: 220px 28px 28px;
   max-width: 460px;
 }
 
 .benefits-feature-content h2 {
   margin: 0 0 10px;
-  font-size: 28px;
+  font-size: 32px;
   line-height: 0.95;
   letter-spacing: -0.04em;
 }
@@ -207,6 +220,7 @@
     radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.05), transparent 26%),
     linear-gradient(135deg, #121212 0%, #050505 100%);
   padding: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .benefits-lounge-top p {
@@ -263,7 +277,8 @@
   align-items: center;
   margin-bottom: 90px;
   background: linear-gradient(135deg, #171717 0%, #0d0d0d 100%);
-  padding: 40px 18px;
+  padding: 40px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .benefits-watermark {
