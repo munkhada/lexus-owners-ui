@@ -80,7 +80,7 @@ export default function Home() {
             </div>
 
             <h1 className="home-title">
-              WELCOME BACK,
+              ТАВТАЙ МОРИЛ,
               <br />
               {profile.fullName}
             </h1>
@@ -109,8 +109,8 @@ export default function Home() {
             </div>
 
             <div className="home-card-bottom">
-              <h2>PROFILE</h2>
-              <p>Manage your personal data and digital garage settings.</p>
+              <h2>Миний хуудас</h2>
+              <p>Таны автомшаинтай холбоотой мэдээлэл тус хуудаст байршиж байна.</p>
             </div>
           </Link>
 
@@ -122,11 +122,9 @@ export default function Home() {
 
             <div className="home-card-bottom">
               <h2>
-                SUPPORT
-                <br />
-                CONCIERGE
+                ТӨЛӨӨЛӨГЧ
               </h2>
-              <p>Direct priority access to your personal Lexus advisor.</p>
+              <p>Тантай холбогдсон Лексусын төлөөлөгч.</p>
             </div>
           </Link>
 
@@ -140,9 +138,9 @@ export default function Home() {
               <h2>
                 LEXUS
                 <br />
-                BENEFITS
+                УРАМШУУЛАЛ
               </h2>
-              <p>Exclusive invitations and premium lifestyle rewards.</p>
+              <p>Лексусын эзэмшигчдэд зориулсан үйлчилгээ.</p>
             </div>
           </Link>
         </section>
@@ -152,24 +150,22 @@ export default function Home() {
 
           <div className="home-feature-copy">
             <h3>
-              CRAFTSMANSHIP
+              ОНЦЛОХ
               <br />
-              REIMAGINED
+              МЭДЭЭЛЭЛ
             </h3>
 
             <p>
-              Experience the Omotenashi philosophy through every touchpoint of
-              your ownership journey. Every detail, from service to lifestyle,
-              is tailored for your unique needs.
+              Зөвхөн танд зориулсан урамшуулал, арга хэмжээний мэдээлэл.
             </p>
 
-            <button className="home-feature-btn">EXPLORE HERITAGE</button>
+            <button className="home-feature-btn">ДАРАХE</button>
           </div>
         </section>
       </main>
 
       <footer className="home-footer">
-        <div className="home-footer-brand">LEXUS MONGOLIA</div>
+        <div className="home-footer-brand">LEXUS MUNKHADA</div>
 
         <div className="home-footer-links">
           <div>
@@ -187,7 +183,7 @@ export default function Home() {
         </div>
 
         <div className="home-footer-copy">
-          © 2024 LEXUS MONGOLIA. ALL RIGHTS RESERVED.
+          © 2026 MUNKHADA LLC. ALL RIGHTS RESERVED.
         </div>
       </footer>
     </div>
