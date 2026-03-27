@@ -59,7 +59,7 @@ export default function Home() {
 
         <div className="home-nav-links">
           <Link to="/home" className="active">
-            Home
+            Нүүр хуудас
           </Link>
           <Link to="/profile">Миний хуудас</Link>
           <Link to="/service">Төлөөлөгч</Link>
