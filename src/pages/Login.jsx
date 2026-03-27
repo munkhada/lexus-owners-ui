@@ -91,10 +91,10 @@ export default function Login() {
           <p className="login-tag">VERIFIED COLLECTIVE</p>
 
           <h1 className="login-title">
-            Lexus эзэмшигч <br />
+            <span>Lexus эзэмшигч </span>  <br />
             <span>та тавтай морилно уу.</span>
             <br />
-            Collective
+            Lexus Munkhada
           </h1>
 
           <p className="login-desc">
