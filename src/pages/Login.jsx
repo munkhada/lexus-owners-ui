@@ -103,7 +103,7 @@ export default function Login() {
         </div>
 
         <div className="login-right">
-          <p className="login-small">AUTHENTICATION REQUIRED</p>
+          <p className="login-small">БҮРТГЭЛТЭЙ УТАСНЫ ДУГААРАА ОРУУЛНА УУ.</p>
 
           {step === 1 ? (
             <form onSubmit={sendOtp}>
