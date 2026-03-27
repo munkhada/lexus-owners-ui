@@ -18,28 +18,31 @@ export default function Home() {
       setUser(JSON.parse(saved));
     } catch {
       localStorage.removeItem("user");
+      localStorage.removeItem("loginExpiresAt");
       navigate("/");
     }
   }, [navigate]);
 
   const logout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("loginExpiresAt");
     navigate("/");
   };
 
   const profile = useMemo(() => {
     const firstname =
-      user?.firstname || user?.firstName || user?.name || "Owner";
+      user?.firstname || user?.firstName || user?.name || user?.["Нэр"] || "Хэрэглэгч";
 
-    const lastname = user?.lastname || user?.lastName || "";
+    const lastname =
+      user?.lastname || user?.lastName || user?.["Овог"] || "";
 
     const fullName =
-      `${lastname ? `${lastname}, ` : ""}${firstname}`.trim() || "Lexus Owner";
+      `${lastname ? `${lastname} ` : ""}${firstname}`.trim() || "Lexus Owner";
 
     const model =
-      user?.model || user?.vehicle || user?.car_model || "LEXUS LX 600";
+      user?.model || user?.["Model-Detail"] || user?.vehicle || "LEXUS LX 600";
 
-    const membership = user?.membership || "Elite";
+    const membership = user?.membership || "Гишүүнчлэл хүчинтэй";
 
     return {
       fullName: fullName.toUpperCase(),
@@ -52,18 +55,18 @@ export default function Home() {
 
   return (
     <div className="home-page">
-      <div className="home-bg"></div>
+      <div className="home-bg" />
 
       <nav className="home-nav">
         <div className="home-logo">LEXUS MUNKHADA</div>
 
         <div className="home-nav-links">
           <Link to="/home" className="active">
-            Нүүр хуудас
+            НҮҮР ХУУДАС
           </Link>
-          <Link to="/profile">Миний хуудас</Link>
-          <Link to="/service">Төлөөлөгч</Link>
-          <Link to="/promo">Урамшуулал</Link>
+          <Link to="/profile">МИНИЙ ХУУДАС</Link>
+          <Link to="/service">ТӨЛӨӨЛӨГЧ</Link>
+          <Link to="/promo">УРАМШУУЛАЛ</Link>
         </div>
 
         <button className="home-account-btn" onClick={logout}>
@@ -76,26 +79,26 @@ export default function Home() {
           <div className="home-hero-copy">
             <div className="home-verified">
               <span className="home-verified-dot"></span>
-              <span>Verified Owner</span>
+              <span>VERIFIED OWNER</span>
             </div>
 
             <h1 className="home-title">
               ТАВТАЙ МОРИЛ,
               <br />
-              {profile.lastName}
+              {profile.fullName}
             </h1>
           </div>
 
           <aside className="home-summary-card">
             <div className="home-summary-block">
-              <div className="home-summary-label">Таны машин</div>
+              <div className="home-summary-label">ТАНЫ МАШИН</div>
               <div className="home-summary-value">{profile.model}</div>
             </div>
 
             <div className="home-summary-divider"></div>
 
             <div className="home-summary-block">
-              <div className="home-summary-label">Гишүүнчлэл</div>
+              <div className="home-summary-label">ГИШҮҮНЧЛЭЛ</div>
               <div className="home-summary-value">★ {profile.membership}</div>
             </div>
           </aside>
@@ -109,8 +112,11 @@ export default function Home() {
             </div>
 
             <div className="home-card-bottom">
-              <h2>Миний хуудас</h2>
-              <p>Таны автомшаинтай холбоотой мэдээлэл тус хуудаст байршиж байна.</p>
+              <h2>МИНИЙ ХУУДАС</h2>
+              <p>
+                Таны автомашинтай холбоотой мэдээлэл тус хуудсанд байрших
+                байна.
+              </p>
             </div>
           </Link>
 
@@ -121,9 +127,7 @@ export default function Home() {
             </div>
 
             <div className="home-card-bottom">
-              <h2>
-                ТӨЛӨӨЛӨГЧ
-              </h2>
+              <h2>ТӨЛӨӨЛӨГЧ</h2>
               <p>Тантай холбогдсон Лексусын төлөөлөгч.</p>
             </div>
           </Link>
@@ -156,10 +160,15 @@ export default function Home() {
             </h3>
 
             <p>
-              Зөвхөн танд зориулсан урамшуулал, арга хэмжээний мэдээлэл.
+              Лексусын эзэмшигчдэд зориулсан онцгой мэдээ, урилга, шинэ
+              үйлчилгээ болон тусгай мэдээллийг эндээс хүлээн авна.
             </p>
 
-            <button className="home-feature-btn">ДАРАХE</button>
+            <button className="home-feature-btn">ДЭЛГЭРЭНГҮЙ</button>
+          </div>
+
+          <div className="home-feature-side-image">
+            <img src="/womens.jpg" alt="Онцлох мэдээлэл" />
           </div>
         </section>
       </main>
@@ -169,21 +178,20 @@ export default function Home() {
 
         <div className="home-footer-links">
           <div>
-            <a href="/">DISCOVER</a>
-            <a href="/">MODELS</a>
-            <a href="/">EXPERIENCE</a>
+            <a href="/">ЗАГВАРУУД</a>
+            <a href="/">ТУРШЛАГА</a>
+            <a href="/">ҮЙЛЧИЛГЭЭ</a>
           </div>
 
           <div>
-            <a href="/">LEGAL</a>
-            <a href="/">PRIVACY</a>
-            <a href="/">TERMS</a>
-            <a href="/">CONTACT</a>
+            <a href="/">НУУЦЛАЛ</a>
+            <a href="/">НӨХЦӨЛ</a>
+            <a href="/">ХОЛБОО БАРИХ</a>
           </div>
         </div>
 
         <div className="home-footer-copy">
-          © 2026 MUNKHADA LLC. ALL RIGHTS RESERVED.
+          © 2024 LEXUS MONGOLIA. ALL RIGHTS RESERVED.
         </div>
       </footer>
     </div>
