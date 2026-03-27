@@ -4,7 +4,6 @@
   background: #0b0b0b;
   color: #f2f2f2;
   overflow-x: hidden;
-  font-family: "Inter", sans-serif;
 }
 
 .profile-bg {
@@ -45,7 +44,6 @@
 
 .profile-nav-links a {
   color: rgba(255, 255, 255, 0.48);
-  text-decoration: none;
   text-transform: uppercase;
   font-size: 12px;
   font-weight: 700;
@@ -78,15 +76,9 @@
 
 .profile-hero {
   display: grid;
-  grid-template-columns: 1fr 240px;
+  grid-template-columns: 1fr;
   gap: 24px;
   margin-bottom: 42px;
-}
-
-.profile-hero-left {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
 }
 
 .profile-eyebrow {
@@ -129,13 +121,6 @@
   color: rgba(255, 255, 255, 0.58);
 }
 
-.profile-hero-right {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-end;
-}
-
 .profile-mini-label {
   margin: 0 0 8px;
   font-size: 10px;
@@ -144,17 +129,9 @@
   color: rgba(255, 255, 255, 0.4);
 }
 
-.profile-membership-id {
-  margin: 0;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: #fff;
-}
-
 .profile-grid {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(280px, 0.95fr);
+  grid-template-columns: minmax(0, 2fr) minmax(320px, 0.9fr);
   gap: 36px;
   align-items: stretch;
 }
@@ -186,10 +163,6 @@
   position: relative;
   z-index: 2;
   padding: 36px;
-}
-
-.vehicle-top {
-  align-self: flex-start;
 }
 
 .vehicle-bottom {
@@ -251,12 +224,6 @@
   font-size: 11px;
   letter-spacing: 0.2em;
   cursor: pointer;
-  transition: 0.2s ease;
-}
-
-.vehicle-outline-btn:hover {
-  background: #fff;
-  color: #111;
 }
 
 .profile-side {
@@ -369,8 +336,6 @@
 
 .info-column ul {
   list-style: none;
-  margin: 0;
-  padding: 0;
 }
 
 .info-column li {
@@ -407,7 +372,6 @@
 .profile-cta-btn {
   background: #f2f2f2;
   color: #111;
-  text-decoration: none;
   padding: 18px 26px;
   min-width: 250px;
   text-align: center;
@@ -439,7 +403,6 @@
 
 .profile-footer-links a {
   color: rgba(255, 255, 255, 0.45);
-  text-decoration: none;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.16em;
@@ -456,14 +419,6 @@
   .profile-grid,
   .profile-info-grid {
     grid-template-columns: 1fr;
-  }
-
-  .profile-hero {
-    grid-template-columns: 1fr;
-  }
-
-  .profile-hero-right {
-    align-items: flex-start;
   }
 
   .profile-concierge-cta {
@@ -512,25 +467,5 @@
   .contact-card,
   .membership-card {
     padding: 24px;
-  }
-
-  .contact-value {
-    font-size: 28px;
-  }
-
-  .contact-email {
-    font-size: 18px;
-  }
-
-  .membership-card h4 {
-    font-size: 34px;
-  }
-
-  .profile-concierge-copy h3 {
-    font-size: 32px;
-  }
-
-  .profile-concierge-copy p {
-    font-size: 16px;
   }
 }
