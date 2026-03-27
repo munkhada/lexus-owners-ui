@@ -91,15 +91,14 @@ export default function Login() {
           <p className="login-tag">VERIFIED COLLECTIVE</p>
 
           <h1 className="login-title">
-            Welcome to the <br />
-            <span>Lexus Mongolia</span>
+            Lexus эзэмшигч <br />
+            <span>та тавтай морилно уу.</span>
             <br />
             Collective
           </h1>
 
           <p className="login-desc">
-            Private access for verified owners only. A digital sanctuary for
-            those who demand precision.
+           Зөвхөн Lexus автомашин эзэмшигч нэвтрэх боломжтой.
           </p>
         </div>
 
