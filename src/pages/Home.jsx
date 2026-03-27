@@ -82,7 +82,7 @@ export default function Home() {
             <h1 className="home-title">
               ТАВТАЙ МОРИЛ,
               <br />
-              {profile.fullName}
+              {profile.lastName}
             </h1>
           </div>
 
