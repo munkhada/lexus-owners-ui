@@ -10,6 +10,9 @@ export default function Promo() {
     navigate("/");
   };
 
+  const mapEmbedUrl =
+    "https://www.google.com/maps?q=Munkhada&output=embed";
+
   return (
     <div className="benefits-page">
       <div className="benefits-bg" />
@@ -46,119 +49,113 @@ export default function Promo() {
 
           <div className="benefits-hero-right">
             <p>
-              Лексусын эзэмшигчдэд зориулсан тусгай урамшуулал, хөнгөлөлт,
-              урилга, давуу эрхийн мэдээлэл энэ хэсэгт байрлана.
+              Лексусын эзэмшигчдэд зориулсан тусгай хөнгөлөлт, урилга, хамтрагч
+              байгууллагын давуу эрхийн мэдээлэл.
             </p>
           </div>
         </section>
 
-        <section className="benefits-feature-card">
-          <div className="benefits-feature-image" />
+        <section className="benefits-top-grid">
+          <div className="benefits-top-left">
+            <div className="benefits-double-card">
+              <div className="benefits-hover-card">
+                <img src="/mulounge.jpg" alt="MU lounge" />
+                <div className="benefits-hover-overlay">
+                  <span>TEST</span>
+                </div>
+              </div>
 
-          <div className="benefits-feature-content">
-            <h2>Тусгай урилга</h2>
-            <p>УЛААНБААТАР — ХААЛТТАЙ АРГА ХЭМЖЭЭ</p>
-            <button>УРИЛГА ХҮСЭХ</button>
-          </div>
-        </section>
-
-        <section className="benefits-grid">
-          <div className="benefits-left-copy">
-            <p className="benefits-section-label">01 / LIFESTYLE</p>
-            <h3>
-              ХАМТРАГЧ
-              <br />
-              ДАВУУ ЭРХ
-            </h3>
-
-            <p className="benefits-section-text">
-              Тансаг хэрэглээ, ресторан, аялал, wellness үйлчилгээ болон
-              Лексусын эзэмшигчдэд зориулсан бусад онцгой саналууд.
-            </p>
-
-            <div className="benefits-links-list">
-              <a href="/">Shangri-La Boutique Collection →</a>
-              <a href="/">Blue Sky Culinary Suite →</a>
+              <div className="benefits-hover-card">
+                <img src="/emerge.jpg" alt="Emerge" />
+                <div className="benefits-hover-overlay">
+                  <span>TEST</span>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="benefits-lounge-card">
-            <div className="benefits-lounge-top">
-              <p>Lexus Lounge Access</p>
-              <span>ЧИНГИС ХААН ОЛОН УЛСЫН НИСЭХ БУУДАЛ</span>
-            </div>
+          <div className="benefits-top-right">
+            <div className="benefits-map-card">
+              <div className="benefits-map-header">
+                <p>MUNKHADA COMPANY</p>
+                <a
+                  href="https://maps.app.goo.gl/XtMS57ZjXTTNUfoo7"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  MAP НЭЭХ
+                </a>
+              </div>
 
-            <div className="benefits-lounge-center">
-              <p>01 LEXUS LOUNGE</p>
-              <p>02 SAFETY LOUNGE</p>
-            </div>
-
-            <div className="benefits-mini-card">
-              <strong>Seamless Transit</strong>
-              <p>
-                Таны аяллыг илүү тухтай, амар болгох тусгай нэвтрэх боломж.
-              </p>
+              <div className="benefits-map-frame">
+                <iframe
+                  title="Munkhada Map"
+                  src={mapEmbedUrl}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="benefits-service-block">
-          <div className="benefits-service-copy">
-            <div className="benefits-watermark">LEXUS</div>
-
-            <h3>
-              ДАВУУ
-              <br />
-              ҮЙЛЧИЛГЭЭ
-            </h3>
-
-            <p>
-              Таны цаг хугацааг хэмнэх, илүү тав тухтай үйлчилгээ авах боломжийг
-              Лексусын эзэмшигчдэд зориулан бэлдэв.
-            </p>
-
-            <div className="benefits-service-actions">
-              <button className="primary-btn">ҮЙЛЧИЛГЭЭ ЗАХИАЛАХ</button>
-              <button className="secondary-btn">ТӨЛӨӨЛӨГЧТЭЙ ХОЛБОГДОХ</button>
+        <section className="benefits-middle-grid">
+          <div className="benefits-small-card">
+            <div className="benefits-small-image">
+              <img src="/airport lounge.jpg" alt="Airport Lounge" />
+              <div className="benefits-small-overlay">
+                <span>TEST</span>
+              </div>
             </div>
           </div>
 
-          <div className="benefits-service-image" />
+          <div className="benefits-small-card">
+            <div className="benefits-small-image">
+              <img src="/owner benefit.jpg" alt="Owner Benefit" />
+              <div className="benefits-small-overlay">
+                <span>TEST</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="benefits-small-card">
+            <div className="benefits-small-image">
+              <img src="/cryo.jpg" alt="Cryo" />
+              <div className="benefits-small-overlay">
+                <span>TEST</span>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section className="benefits-directory">
           <div className="benefits-directory-header">
-            <p className="benefits-section-label">БҮРЭН ЖАГСААЛТ</p>
-            <span>ДЭЛГЭРЭНГҮЙ ҮЗЭХ</span>
+            <p className="benefits-section-label">
+              ТУН УДАХГҮЙ ХЭРЭГЖИХ УРАМШУУЛАЛ
+            </p>
+            <span>УДАЛГҮЙ</span>
           </div>
 
           <div className="benefits-directory-list">
             <div className="benefits-directory-row">
               <span>01</span>
-              <strong>Үнэгүй valet үйлчилгээ</strong>
-              <p>
-                Сонгогдсон байршлуудад автомашинаа тухтай, хурдан хүлээлгэн
-                өгөх боломж.
-              </p>
-              <a href="/">ҮЗЭХ</a>
+              <strong>TEST</strong>
+              <p>Тун удахгүй нэмэгдэх шинэ урамшууллын мэдээлэл.</p>
+              <a href="/">ХҮЛЭЭГДЭЖ БАЙНА</a>
             </div>
 
             <div className="benefits-directory-row">
               <span>02</span>
-              <strong>Улирлын detailing</strong>
-              <p>
-                Автомашины цэвэрлэгээ, хамгаалалтын тусгай үйлчилгээний санал.
-              </p>
-              <a href="/">ҮЗЭХ</a>
+              <strong>TEST</strong>
+              <p>Лексусын эзэмшигчдэд зориулсан шинэ хамтрагч санал.</p>
+              <a href="/">ХҮЛЭЭГДЭЖ БАЙНА</a>
             </div>
 
             <div className="benefits-directory-row">
               <span>03</span>
-              <strong>Онцгой test drive</strong>
-              <p>
-                Шинэ загваруудыг бусдаас өмнө туршиж үзэх тусгай боломж.
-              </p>
-              <a href="/">ҮЗЭХ</a>
+              <strong>TEST</strong>
+              <p>Тусгай эрх, урилга, хөнгөлөлтийн дараагийн шат.</p>
+              <a href="/">ХҮЛЭЭГДЭЖ БАЙНА</a>
             </div>
           </div>
         </section>
