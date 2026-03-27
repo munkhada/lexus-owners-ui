@@ -88,13 +88,13 @@ export default function Login() {
 
       <div className="login-container">
         <div className="login-left">
-          <p className="login-tag">VERIFIED COLLECTIVE</p>
+          <p className="login-tag">LEXUS MUNKHADA</p>
 
           <h1 className="login-title">
             <span>Lexus эзэмшигч </span>  <br />
             <span>та тавтай морилно уу.</span>
-            <br />
-            Lexus Munkhada
+          
+          
           </h1>
 
           <p className="login-desc">
