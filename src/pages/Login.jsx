@@ -92,7 +92,7 @@ export default function Login() {
 
           <h1 className="login-title">
             <span>Lexus эзэмшигч </span>  <br />
-            <span>та тавтай морилно уу.</span>
+            <span>Та тавтай морилно уу.</span>
           
           
           </h1>
@@ -119,7 +119,7 @@ export default function Login() {
               {error && <p className="login-error">{error}</p>}
 
               <button className="login-btn" disabled={loading}>
-                {loading ? "CHECKING..." : "LOGIN"} →
+                {loading ? "ШАЛГАЖ БАЙНА..." : "НЭВТРЭХ"} →
               </button>
             </form>
           ) : (
@@ -137,7 +137,7 @@ export default function Login() {
               {error && <p className="login-error">{error}</p>}
 
               <button className="login-btn" disabled={loading}>
-                {loading ? "VERIFYING..." : "LOGIN"} →
+                {loading ? "ШАЛГАЖ БАЙНА..." : "НЭВТРЭХ"} →
               </button>
             </form>
           )}
