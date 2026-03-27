@@ -55,7 +55,7 @@ export default function Home() {
       <div className="home-bg"></div>
 
       <nav className="home-nav">
-        <div className="home-logo">LEXUS MONGOLIA</div>
+        <div className="home-logo">LEXUS MUNKHADA</div>
 
         <div className="home-nav-links">
           <Link to="/home" className="active">
@@ -67,7 +67,7 @@ export default function Home() {
         </div>
 
         <button className="home-account-btn" onClick={logout}>
-          ○
+          ГАРАХ
         </button>
       </nav>
 
