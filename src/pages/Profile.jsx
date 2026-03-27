@@ -20,7 +20,7 @@ export default function Profile() {
     user?.["Нэр"] ||
     "ERDENE";
 
-  const fullName = `${lastname}  ${firstname}`.toUpperCase();
+  const fullName = `${lastname} ${firstname}`.toUpperCase();
 
   const phone =
     user?.phone ||
@@ -30,13 +30,12 @@ export default function Profile() {
   const email =
     user?.email ||
     user?.["И-мэйл хаяг"] ||
-   "b.erdene@lexus-owner.mn";
-  
+    "xxxxx@xxxxxx";
+
   const vinNumber =
-  user?.vin ||
-  user?.vinNumber ||
-  user?.["Vin number"] ||
-  "VIN NOT FOUND";
+    user?.vinNumber ||
+    user?.["Vin number"] ||
+    "VIN NOT FOUND";
 
   const getCarImage = (value) => {
     if (!value) return "/LX.jpg";
@@ -56,6 +55,7 @@ export default function Profile() {
 
   const logout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("loginExpiresAt");
     navigate("/");
   };
 
@@ -64,7 +64,7 @@ export default function Profile() {
       <div className="profile-bg" />
 
       <nav className="profile-nav">
-        <div className="profile-logo">LEXUS MUNKHADA</div>
+        <div className="profile-logo">LEXUS MONGOLIA</div>
 
         <div className="profile-nav-links">
           <Link to="/home">HOME</Link>
@@ -92,7 +92,11 @@ export default function Profile() {
             </div>
           </div>
 
-          
+          <div className="profile-hero-right">
+            <p className="profile-mini-label">MEMBERSHIP ID</p>
+            <p className="profile-membership-id">LX-9911-0001</p>
+          </div>
+        </section>
 
         <section className="profile-grid">
           <div
@@ -111,9 +115,9 @@ export default function Profile() {
 
               <div className="vehicle-meta-row">
                 <div>
-  <span className="vehicle-meta-label">VIN NUMBER</span>
-  <strong>{vinNumber}</strong>
-</div>
+                  <span className="vehicle-meta-label">VIN NUMBER</span>
+                  <strong>{vinNumber}</strong>
+                </div>
 
                 <button className="vehicle-outline-btn">
                   SERVICE RECORDS
@@ -187,7 +191,7 @@ export default function Profile() {
           <div className="profile-concierge-copy">
             <h3>THE LEXUS CONCIERGE</h3>
             <p>
-              Personalized assistance for your LX 600, including maintenance
+              Personalized assistance for your vehicle, including maintenance
               scheduling and exclusive event access, available 24/7.
             </p>
           </div>
