@@ -144,7 +144,7 @@ export default function Profile() {
                     }
                   }}
                 >
-                  ЗАСВАРЫН ТҮҮХ
+                  ГАРЫН АВЛАГА
                 </button>
               </div>
             </div>
