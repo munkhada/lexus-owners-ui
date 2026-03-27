@@ -27,15 +27,15 @@ export default function Profile() {
     user?.["Утасны дугаар"] ||
     "9911XXXX";
 
- const email =
-  user?.email ||
-  user?.["И-мэйл хаяг"] ||
-  "И-мэйл бүртгэлгүй";
+  const email =
+    user?.email ||
+    user?.["И-мэйл хаяг"] ||
+    "И-мэйл бүртгэлгүй";
 
   const vinNumber =
     user?.vinNumber ||
     user?.["Vin number"] ||
-    "Арал олдсонгүй";
+    "VIN NOT FOUND";
 
   const getCarImage = (value) => {
     if (!value) return "/LX.jpg";
@@ -64,7 +64,7 @@ export default function Profile() {
       <div className="profile-bg" />
 
       <nav className="profile-nav">
-        <div className="profile-logo">LEXUS MMUNKHADA</div>
+        <div className="profile-logo">LEXUS MUNKHADA</div>
 
         <div className="profile-nav-links">
           <Link to="/home">НҮҮР ХУУДАС</Link>
@@ -83,15 +83,15 @@ export default function Profile() {
       <main className="profile-main">
         <section className="profile-hero">
           <div className="profile-hero-left">
-            <p className="profile-eyebrow">ACCOUNT OVERVIEW</p>
+            <p className="profile-eyebrow">ЕРӨНХИЙ МЭДЭЭЛЭЛ</p>
             <h1 className="profile-name">{fullName}</h1>
 
             <div className="profile-owner-row">
               <span className="profile-owner-line" />
-              <p>VERIFIED PREMIUM OWNER</p>
+              <p>ГИШҮҮНЧЛЭЛ ХҮЧИНТЭЙ</p>
             </div>
           </div>
-
+        </section>
 
         <section className="profile-grid">
           <div
@@ -101,8 +101,8 @@ export default function Profile() {
             <div className="vehicle-card-overlay" />
 
             <div className="vehicle-top">
-              <h2>ТАНЫ АВТОМАШИН</h2>
-              <p>Бодит зураг биш болно</p>
+              <h2>БҮРТГЭЛТЭЙ МАШИН</h2>
+              <p>Таны идэвхтэй автомашины мэдээлэл</p>
             </div>
 
             <div className="vehicle-bottom">
@@ -110,11 +110,13 @@ export default function Profile() {
 
               <div className="vehicle-meta-row">
                 <div>
-                  <span className="vehicle-meta-label">АРЛЫН ДУГААР</span>
+                  <span className="vehicle-meta-label">VIN NUMBER</span>
                   <strong>{vinNumber}</strong>
                 </div>
 
-               
+                <button className="vehicle-outline-btn">
+                  ЗАСВАРЫН ТҮҮХ
+                </button>
               </div>
             </div>
           </div>
@@ -124,12 +126,12 @@ export default function Profile() {
               <div className="contact-icon">⌕</div>
 
               <div className="contact-block">
-                <p className="profile-mini-label">Утасны дугаар</p>
+                <p className="profile-mini-label">ҮНДСЭН ХОЛБОО БАРИХ</p>
                 <p className="contact-value">+976 {phone}</p>
               </div>
 
               <div className="contact-block">
-                <p className="profile-mini-label">И-мейл хаяг</p>
+                <p className="profile-mini-label">И-МЭЙЛ ХАЯГ</p>
                 <p className="contact-email">{email}</p>
               </div>
             </div>
@@ -147,7 +149,7 @@ export default function Profile() {
               </h4>
 
               <div className="membership-bottom-row">
-                <p>EXPIRES DEC 2025</p>
+                <p>ДУУСАХ ХУГАЦАА 2025.12</p>
                 <span>→</span>
               </div>
             </div>
@@ -156,7 +158,7 @@ export default function Profile() {
 
         <section className="profile-info-grid">
           <div className="info-column">
-            <h5>SECURITY</h5>
+            <h5>АЮУЛГҮЙ БАЙДАЛ</h5>
             <ul>
               <li>Biometric Authentication</li>
               <li>Encryption Keys</li>
@@ -164,7 +166,7 @@ export default function Profile() {
           </div>
 
           <div className="info-column">
-            <h5>PREFERENCES</h5>
+            <h5>ТОХИРГОО</h5>
             <ul>
               <li>Concierge Language</li>
               <li>Unit System</li>
@@ -172,7 +174,7 @@ export default function Profile() {
           </div>
 
           <div className="info-column">
-            <h5>DOCUMENTS</h5>
+            <h5>БАРИМТ БИЧИГ</h5>
             <ul>
               <li>Digital Warranty</li>
               <li>Ownership Certificate</li>
@@ -182,26 +184,26 @@ export default function Profile() {
 
         <section className="profile-concierge-cta">
           <div className="profile-concierge-copy">
-            <h3>THE LEXUS CONCIERGE</h3>
+            <h3>ЛЕКСУС ТӨЛӨӨЛӨГЧ</h3>
             <p>
-              Personalized assistance for your vehicle, including maintenance
-              scheduling and exclusive event access, available 24/7.
+              Таны автомашинтай холбоотой тусламж, үйлчилгээ, арга хэмжээний
+              мэдээллийг эндээс авах боломжтой.
             </p>
           </div>
 
           <Link to="/service" className="profile-cta-btn">
-            CONTACT PERSONAL ASSISTANT
+            ТӨЛӨӨЛӨГЧТЭЙ ХОЛБОГДОХ
           </Link>
         </section>
       </main>
 
       <footer className="profile-footer">
-        <div className="profile-footer-logo">LEXUS MONGOLIA</div>
+        <div className="profile-footer-logo">LEXUS MUNKHADA</div>
 
         <div className="profile-footer-links">
-          <a href="/">PRIVACY</a>
-          <a href="/">TERMS</a>
-          <a href="/">CONTACT</a>
+          <a href="/">НУУЦЛАЛ</a>
+          <a href="/">НӨХЦӨЛ</a>
+          <a href="/">ХОЛБОО БАРИХ</a>
         </div>
 
         <div className="profile-footer-copy">
