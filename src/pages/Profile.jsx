@@ -20,7 +20,7 @@ export default function Profile() {
     user?.["Нэр"] ||
     "ERDENE";
 
-  const fullName = `${lastname}-${firstname}`.toUpperCase();
+  const fullName = `${lastname}  ${firstname}`.toUpperCase();
 
   const phone =
     user?.phone ||
